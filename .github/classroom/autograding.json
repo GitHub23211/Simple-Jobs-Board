@@ -1,0 +1,124 @@
+{
+  "tests": [
+    {
+      "name": "Level 1a",
+      "setup": "npm install",
+      "run": "env SPEC_FILE=level1-a.spec.js npm run test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "Level 1b",
+      "setup": "npm install",
+      "run": "env SPEC_FILE=level1-b.spec.js npm test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "Level 1c",
+      "setup": "npm install",
+      "run": "env SPEC_FILE=level1-c.spec.js npm test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "Level 1d",
+      "setup": "npm install",
+      "run": "env SPEC_FILE=level1-d.spec.js npm test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "Level 1e",
+      "setup": "npm install",
+      "run": "env SPEC_FILE=level1-e.spec.js npm test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "Level 2a",
+      "setup": "npm install",
+      "run": "env SPEC_FILE=level2-a.spec.js npm test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "Level 2b",
+      "setup": "npm install",
+      "run": "env SPEC_FILE=level2-b.spec.js npm test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "Level 2c",
+      "setup": "npm install",
+      "run": "env SPEC_FILE=level2-c.spec.js npm test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "Level 2d",
+      "setup": "npm install",
+      "run": "env SPEC_FILE=level2-d.spec.js npm test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "Level 2e",
+      "setup": "npm install",
+      "run": "env SPEC_FILE=level2-e.spec.js npm test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "Level 2f",
+      "setup": "npm install",
+      "run": "env SPEC_FILE=level2-f.spec.js npm test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "Level 2g",
+      "setup": "npm install",
+      "run": "env SPEC_FILE=level2-g.spec.js npm test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    }
+  ]
+}
