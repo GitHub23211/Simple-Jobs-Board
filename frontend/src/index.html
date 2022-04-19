@@ -13,6 +13,39 @@
     </head>
 
     <body>
+        <header class="page-header">
+            <a href="/" class="logo">Bob's Jobs</a>
+            <div class="page-header-main ">
+                <nav class="main-nav">
+                    <ul class="main-menu">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/#!/jobs" class="pagelink">Jobs</a></li>
+                        <li><a href="/#!/help" class="pagelink">Applicant Help</a></li>
+                        <li><a href="/#!/about" class="pagelink">About Us</a></li>
+                    </ul>
+                </nav>
+                                            
+                <div class="header-search">
+                    <form action="/search" role="search" class="search-form
+                    search-widget" id="nav-main-search">
+                    <label for="main-q" class="visually-hidden">Search Jobs</label>
+                    <input id="main-q"  type="search" class="search-input-field"
+                    name="q" placeholder="Site search..." value="">
+                    <input type="submit" class="search-button" aria-label="Search"
+                    value="Search"> 
+                    </form>
+                </div>
+    
+                <div class="header-auth">
+                    <span>
+                        <a href="/#!/login" id="login-link">Sign In</a> 
+                        or
+                        <a href="/#!/register" id="register-link">Register</a>
+                    </span>
+                </div>
+            </div>
+        </header>
+
         <div id='main'></div>  
     </body>
 </html>

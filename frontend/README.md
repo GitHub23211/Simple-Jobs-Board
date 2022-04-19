@@ -1,3 +1,6 @@
 # COMP2110 Bob's Jobs Frontend
 
-This project implements the front-end code for Bob's Jobs.
+* Took style.css from Assignment 1 to use as the CSS Style for this assignment.
+* Took header code from Assignment 1 to create the header, navigation bar and search bar for the document.
+* Rough implementation of Level 1 code up to adding the "selected" class to the current page.
+    * Made three view functions that display a different message depending on the hash to work out how to use the router class.
