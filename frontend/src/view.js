@@ -15,13 +15,13 @@ const view = {
     },
 
     aboutView: function() {
-        this.applyTemplate("text-template", `Be sure to he honest in your application!`,
+        this.applyTemplate("text-template", `Bob's Jobs is a revolution in career planning brought to you by Bob Bobalooba himself!`,
         "About Us")
     },
 
         
     helpView: function(html, selectedNav) {
-        this.applyTemplate("text-template", `Bob's Jobs is a revolution in career planning brought to you by Bob Bobalooba himself!`,
+        this.applyTemplate("text-template", `Be sure to he honest in your application!`,
         "Applicant Help")
     },
 

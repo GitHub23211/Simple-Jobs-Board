@@ -6,7 +6,7 @@ const router = new Router(view.errorView)
 window.addEventListener("modelUpdated", () => {
     let jobs = model.data.jobs
     let companies = model.data.companies
-
+    
     router.get('/#', () => {
         view.homeView(jobs)
     })
