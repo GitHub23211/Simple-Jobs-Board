@@ -18,7 +18,7 @@
             <div class="page-header-main ">
                 <nav class="main-nav">
                     <ul class="main-menu">
-                        <li><a href="/">Home</a></li>
+                        <li><a href="/#!/#">Home</a></li>
                         <li><a href="/#!/job">Jobs</a></li>
                         <li><a href="/#!/help">Applicant Help</a></li>
                         <li><a href="/#!/about">About Us</a></li>
@@ -67,11 +67,11 @@
         </script>
 
         <script id="job-template" type="text/x-handlebars-template">
-            <div class='job-detailed'>
+            <div class='job-description'>
                 <div id='jobtitle'> {{data.attributes.title}} </div>
                 <div id='location'> Location: {{data.attributes.location}} </div>
                 <div id='type'> Type: {{data.attributes.type}} </div>
-                <div id='job-description'> {{{data.attributes.description}}} </div> 
+                <div id='description'> {{{data.attributes.description}}} </div> 
                 <div id='company'>Company: <a href='/#!/companies/{{data.attributes.company.data.id}}'>{{data.attributes.company.data.attributes.name}} </a></div>
             </div>
         </script>

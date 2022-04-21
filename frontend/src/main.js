@@ -7,7 +7,7 @@ window.addEventListener("modelUpdated", () => {
     let jobs = model.data.jobs
     let companies = model.data.companies
 
-    router.get('/', () => {
+    router.get('/#', () => {
         view.homeView(jobs)
     })
     
