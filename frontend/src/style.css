@@ -130,7 +130,7 @@ a:hover {
     text-align: center;
     font-weight: bold;
     font-size: 120%;
-    color: #4964E9;
+    color: #0029f5;
 }
 
 .company {
@@ -147,7 +147,7 @@ a:hover {
     font-weight: bold;
 }
 
-.salary {
+.type {
     grid-column: 1;
     margin-top: 1em;
     margin-left: 1em;

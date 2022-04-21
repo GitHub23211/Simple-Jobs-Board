@@ -19,7 +19,7 @@
                 <nav class="main-nav">
                     <ul class="main-menu">
                         <li><a href="/">Home</a></li>
-                        <li><a href="/#!/jobs">Jobs</a></li>
+                        <li><a href="/#!/job">Jobs</a></li>
                         <li><a href="/#!/help">Applicant Help</a></li>
                         <li><a href="/#!/about">About Us</a></li>
                     </ul>
@@ -48,5 +48,42 @@
 
         <div id='main'></div>
         </div>
+
+    <!-- Handlebars templates -->
+        <script id="text-template" type="text/x-handlebars-template">
+            <p>{{text}}</p>
+        </script>
+
+        <script id="home-template" type="text/x-handlebars-template">
+            <div class='joblist'>
+                {{#eachJob job 2}}
+                    <div class='job'>
+                        <div class='jobtitle'><a href='/#!/jobs/{{id}}'> {{attributes.title}} </a></div>
+                        <div class='location'> Location: {{attributes.location}} </div>
+                        <div class='type'> Type: {{attributes.type}} </div>
+                    </div>
+                {{/eachJob}}
+            </div>
+        </script>
+
+        <script id="job-template" type="text/x-handlebars-template">
+            `<div class='job-description'>
+                <div class='jobtitle'> {{data.attributes.title}} </div>
+                <div class='location'> Location: {{data.attributes.location}} </div>
+                <div class='type'> Type: {{data.attributes.type}} </div>
+                <div class='company'>Company: <a href='/#!/companies/{{data.attributes.company.data.id}}'>{{data.attributes.company.data.attributes.name}} </a></div>
+            </div>`
+        </script>
+
+        <script id="company-template" type="text/x-handlebars-template">
+            `<div class='company-description'>
+                {{#if data.attributes.logo}}
+                    <div class='company-logo'> <img src='{{data.attributes.logo}}' width=100 height=100 alt="{{data.attributes.name}}'s logo"> </div>
+                {{/if}}
+                <div class='company-name'> Name: {{data.attributes.name}} </div>
+                <div class='company-url'>Website: <a href='{{data.attributes.url}}'> {{data.attributes.url}} </a></div>
+            </div>
+        </script>
+
     </body>
 </html>

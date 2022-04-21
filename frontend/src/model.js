@@ -5,7 +5,8 @@ const model = {
     jobsInfo: './sample-data.json',
 
     data: {
-        jobs: []
+        jobs: [],
+        companies: []
     },
 
     loadJobs: function() {
@@ -16,7 +17,8 @@ const model = {
         })
         .then(
             (data) => {
-                this.data.jobs = data;
+                this.data.jobs = data.jobs;
+                this.data.companies = data.companies
                 let event = new CustomEvent("modelUpdated");
                 window.dispatchEvent(event)
             }

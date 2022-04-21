@@ -4,9 +4,11 @@ import {view} from './view.js'
 
 const router = new Router(view.errorView)
 window.addEventListener("modelUpdated", () => {
-    let data = model.data.jobs
+    let jobs = model.data.jobs
+    let companies = model.data.companies
+
     router.get('/', () => {
-        view.homeView(data)
+        view.homeView(jobs)
     })
     
     router.get('/about', () => {
@@ -16,6 +18,15 @@ window.addEventListener("modelUpdated", () => {
     router.get('/help', () => {
         view.helpView();
     })
+
+    router.get('/jobs', (pathInfo) => {
+        view.jobView(jobs, pathInfo.id - jobs[0].id)
+    })
+
+    router.get('/companies', (pathInfo) => {
+        view.companyView(companies, pathInfo.id - companies[0].id)
+    })
+
     router.route()
 })
 

@@ -3,62 +3,76 @@ export {view}
 const view = {
     errorView: function() {
         let target = document.getElementById('main')
-        target.innerHTML = '<h1> Page not found </h1>'
+        let template = '<h1> Page not found </h1>'
+        target.innerHTML = template
     },
     
-    aboutView: function() {
+    applyTemplate: function(id, string, nav) {
         let target = document.getElementById('main')
-        target.innerHTML = `<p1> Bob's Jobs is a revolution in career planning brought to you by Bob Bobalooba himself! </p>`
-        this.selectedNav("About Us")
+        let template = Handlebars.compile(document.getElementById(id).innerText)
+        target.innerHTML = template({text:string})
+        selectedNav(nav)
     },
-    
+
+    aboutView: function() {
+        this.applyTemplate("text-template", `Be sure to he honest in your application!`,
+        "About Us")
+    },
+
+        
+    helpView: function(html, selectedNav) {
+        this.applyTemplate("text-template", `Bob's Jobs is a revolution in career planning brought to you by Bob Bobalooba himself!`,
+        "Applicant Help")
+    },
+
+        
     homeView: function(data) {
         let target = document.getElementById('main')
-
-    //Custom Handlebars helper function called "eachJob"
-    //It takes the data parameter passed into homeView and implements the Handlebars template below it
-    //for the first 10 entries in the data.
-        Handlebars.registerHelper('eachJob', function(data, options) {
-            let template = ""
-            for(let i = 0; i < 10; i++) {
-                template = template + options.fn(data[i])
-            }
-            return template;
-        })
-    
-        let template = Handlebars.compile(
-            `<div class='joblist'>
-                {{#eachJob job}}
-                    <div class='job'>
-                        <div class='jobtitle'> {{attributes.title}} </div>
-                        <div class='location'> Location: {{attributes.location}} </div>
-                        <div class='salary'> Type: {{attributes.type}} </div>
-                    </div>
-                {{/eachJob}}
-            </div>`
-        )
-        target.innerHTML = template({job:data.jobs})
-        this.selectedNav("Home")
+        let template = Handlebars.compile(document.getElementById("home-template").innerText)
+        target.innerHTML = template({job:data})
+        selectedNav("Home")
     },
     
-    helpView: function() {
+    listView: function(data, id, templateName) {
         let target = document.getElementById('main')
-        target.innerHTML = `<p1>Be sure to he honest in your application!</p1>`
-        this.selectedNav("Applicant Help")
+        let list = data[id];
+        let template = Handlebars.compile(document.getElementById(templateName).innerText)
+        target.innerHTML = template({data: list})
     },
-    
-    
-    //Finds the navigation menu link via its innerText then adds the "selected" class to that element's classList
-    //It then removes the "selected" class from all the other HTML elements.
-    selectedNav: function(id) {
-        let nav = document.getElementsByClassName('main-menu')
-        for(let i = 0; i < nav[0].children.length; i++) {
-            if(nav[0].children[i].innerText === id) {
-                nav[0].children[i].classList.add('selected')
-            }
-            else {
-                nav[0].children[i].classList.remove('selected')
-            }
+
+    jobView: function(data, id) {
+        this.listView(data, id, "job-template")
+    },
+
+    companyView: function(data, id) {
+        this.listView(data, id, "company-template")
+    }
+}
+
+
+// <--------------- Helper Functions --------------->
+
+//Finds the navigation menu link via its innerText then adds the "selected" class to that element's classList
+//It then removes the "selected" class from all the other HTML elements.
+const selectedNav = function(id) {
+    let nav = document.getElementsByClassName('main-menu')
+    for(let i = 0; i < nav[0].children.length; i++) {
+        if(nav[0].children[i].innerText === id) {
+            nav[0].children[i].classList.add('selected')
+        }
+        else {
+            nav[0].children[i].classList.remove('selected')
         }
     }
 }
+
+//Custom Handlebars helper function called "eachJob"
+//It takes the data parameter passed into homeView and implements the Handlebars template below it
+//for the first 10 entries in the data.
+Handlebars.registerHelper('eachJob', function(data, limit, options) {
+    let template = ""
+    for(let i = 0; i < limit; i++) {
+        template = template + options.fn(data[i])
+    }
+    return template;
+})
