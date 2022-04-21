@@ -20,3 +20,5 @@
 * Updated the data variable in model to hold arrays for both jobs and companies. These arrays are then accessed by the jobView and companyView functions respectively.
 * Refactored view.js again to be a bit neater and less repetitive.
 * Moved all the handlebar templates to the bottom of index.html.
+* Added job description to individual job pages.
+* Styled individual job pages.

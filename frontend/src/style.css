@@ -110,7 +110,7 @@ a:hover {
     grid-template-columns: 1fr 2fr;
     grid-template-rows: repeat(5, 1fr);
     column-gap: 5px;
-    background-color: #fafafa62;
+    background-color: #fafafa81;
     border: 2px groove black;
     width: 50vw;
     height: 350px;
@@ -120,10 +120,10 @@ a:hover {
 }
 
 .job:hover {
-    box-shadow: 0px 0px 0px 4px rgba(214, 214, 214, 0.7);
+    box-shadow: 0px 0px 0px 4px rgba(168, 166, 166, 0.7);
 }
 
-.jobtitle {
+.job #jobtitle {
     grid-column: 1/3;
     margin-top: 1em;
     margin-left: 1em;
@@ -133,33 +133,67 @@ a:hover {
     color: #0029f5;
 }
 
-.company {
+.job #company {
     grid-column: 1;
     margin-top: 1em;
     margin-left: 1em;
     font-weight: bold;
 }
 
-.location {
+.job #location {
     grid-column: 1;
     margin-top: 1em;
     margin-left: 1em;
     font-weight: bold;
 }
 
-.type {
+.job #type {
     grid-column: 1;
     margin-top: 1em;
     margin-left: 1em;
     font-weight: bold;
 }
 
-.description {
+.job-detailed {
     display: grid;
-    grid-column: 2;
+    grid-template-columns: repeat(5, 1fr);
+    background-color: #fafafa81;
+}
+
+.job-detailed #jobtitle {
+    grid-column: 1/6;
+    margin-top: 1em;
+    margin-left: 1em;
+    text-align: center;
+    font-weight: bold;
+    font-size: 120%;
+    color: #0029f5;
+}
+
+.job-detailed #company {
+    grid-column: 1;
+    margin-top: 1em;
+    margin-left: 1em;
+    font-weight: bold;
+}
+
+.job-detailed #location {
+    grid-column: 1;
+    margin-top: 1em;
+    margin-left: 1em;
+    font-weight: bold;
+}
+
+.job-detailed #type {
+    grid-column: 1;
+    margin-top: 1em;
+    margin-left: 1em;
+    font-weight: bold;
+}
+
+.job-detailed #job-description {
+    grid-column: 2/5;
     grid-row: 2/6;
-    overflow: scroll;
-    overflow-x: hidden;
     height: auto;
 }
 

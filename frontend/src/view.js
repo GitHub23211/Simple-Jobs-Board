@@ -67,8 +67,8 @@ const selectedNav = function(id) {
 }
 
 //Custom Handlebars helper function called "eachJob"
-//It takes the data parameter passed into homeView and implements the Handlebars template below it
-//for the first 10 entries in the data.
+//It basically takes the job array in sample-data.json and implements "job-template"
+//for a certain number of job entries up until the "limit" paramater.
 Handlebars.registerHelper('eachJob', function(data, limit, options) {
     let template = ""
     for(let i = 0; i < limit; i++) {

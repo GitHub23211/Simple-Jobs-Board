@@ -56,32 +56,35 @@
 
         <script id="home-template" type="text/x-handlebars-template">
             <div class='joblist'>
-                {{#eachJob job 2}}
+                {{#eachJob job 10}}
                     <div class='job'>
-                        <div class='jobtitle'><a href='/#!/jobs/{{id}}'> {{attributes.title}} </a></div>
-                        <div class='location'> Location: {{attributes.location}} </div>
-                        <div class='type'> Type: {{attributes.type}} </div>
+                        <div id='jobtitle'><a href='/#!/jobs/{{id}}'> {{attributes.title}} </a></div>
+                        <div id='location'> Location: {{attributes.location}} </div>
+                        <div id='type'> Type: {{attributes.type}} </div>
                     </div>
                 {{/eachJob}}
             </div>
         </script>
 
         <script id="job-template" type="text/x-handlebars-template">
-            `<div class='job-description'>
-                <div class='jobtitle'> {{data.attributes.title}} </div>
-                <div class='location'> Location: {{data.attributes.location}} </div>
-                <div class='type'> Type: {{data.attributes.type}} </div>
-                <div class='company'>Company: <a href='/#!/companies/{{data.attributes.company.data.id}}'>{{data.attributes.company.data.attributes.name}} </a></div>
-            </div>`
+            <div class='job-detailed'>
+                <div id='jobtitle'> {{data.attributes.title}} </div>
+                <div id='location'> Location: {{data.attributes.location}} </div>
+                <div id='type'> Type: {{data.attributes.type}} </div>
+                <div id='job-description'> {{{data.attributes.description}}} </div> 
+                <div id='company'>Company: <a href='/#!/companies/{{data.attributes.company.data.id}}'>{{data.attributes.company.data.attributes.name}} </a></div>
+            </div>
         </script>
 
         <script id="company-template" type="text/x-handlebars-template">
-            `<div class='company-description'>
+            <div class='company-description'>
                 {{#if data.attributes.logo}}
                     <div class='company-logo'> <img src='{{data.attributes.logo}}' width=100 height=100 alt="{{data.attributes.name}}'s logo"> </div>
                 {{/if}}
                 <div class='company-name'> Name: {{data.attributes.name}} </div>
-                <div class='company-url'>Website: <a href='{{data.attributes.url}}'> {{data.attributes.url}} </a></div>
+                {{#if data.attributes.url}}
+                    <div class='company-url'>Website: <a href='{{data.attributes.url}}'> {{data.attributes.url}} </a></div>
+                {{/if}}
             </div>
         </script>
 
