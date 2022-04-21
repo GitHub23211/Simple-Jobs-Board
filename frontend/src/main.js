@@ -4,8 +4,8 @@ import {view} from './view.js'
 
 const router = new Router(view.errorView)
 window.addEventListener("modelUpdated", () => {
+    let data = model.data
     let jobs = model.data.jobs
-    let companies = model.data.companies
 
     router.get('/', () => {
         view.homeView(jobs)
@@ -28,7 +28,7 @@ window.addEventListener("modelUpdated", () => {
     })
 
     router.get('/companies', (pathInfo) => {
-        view.companyView(companies, pathInfo.id - companies[0].id)
+        view.companyView(data, pathInfo.id - data.companies[0].id)
     })
 
     router.route()

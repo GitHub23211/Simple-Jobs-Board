@@ -22,3 +22,4 @@
 * Moved all the handlebar templates to the bottom of index.html.
 * Added job description to individual job pages.
 * Styled individual job pages.
+* Modified companyView() to display the company logo and all jobs they have posted.

@@ -33,19 +33,17 @@ const view = {
         selectedNav("Home")
     },
     
-    listView: function(data, id, templateName) {
+    jobView: function(data, id) {
         let target = document.getElementById('main')
         let list = data[id];
-        let template = Handlebars.compile(document.getElementById(templateName).innerText)
+        let template = Handlebars.compile(document.getElementById("job-template").innerText)
         target.innerHTML = template({data: list})
     },
 
-    jobView: function(data, id) {
-        this.listView(data, id, "job-template")
-    },
-
     companyView: function(data, id) {
-        this.listView(data, id, "company-template")
+        let target = document.getElementById('main')
+        let template = Handlebars.compile(document.getElementById("company-template").innerText)
+        target.innerHTML = template({data: data.companies[id], job:data.jobs, companyID:(id+data.companies[0].id)})
     }
 }
 
@@ -69,10 +67,20 @@ const selectedNav = function(id) {
 //Custom Handlebars helper function called "eachJob"
 //It basically takes the job array in sample-data.json and implements "job-template"
 //for a certain number of job entries up until the "limit" paramater.
-Handlebars.registerHelper('eachJob', function(data, limit, options) {
+Handlebars.registerHelper('eachJob', function(data, options) {
     let template = ""
-    for(let i = 0; i < limit; i++) {
+    for(let i = 0; i < 10; i++) {
         template = template + options.fn(data[i])
+    }
+    return template;
+})
+
+Handlebars.registerHelper('eachCompanyJob', function(data, id, options) {
+    let template = ""
+    for(let i = 0; i < data.length; i++) {
+        if(data[i].attributes.company.data.id == id) {
+            template = template + options.fn(data[i])
+        }
     }
     return template;
 })

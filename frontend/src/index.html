@@ -56,7 +56,7 @@
 
         <script id="home-template" type="text/x-handlebars-template">
             <div class='joblist'>
-                {{#eachJob job 10}}
+                {{#eachJob job}}
                     <div class='job'>
                         <div id='jobtitle'><a href='/#!/jobs/{{id}}'> {{attributes.title}} </a></div>
                         <div id='location'> Location: {{attributes.location}} </div>
@@ -78,13 +78,22 @@
 
         <script id="company-template" type="text/x-handlebars-template">
             <div class='company-description'>
+                <div class='company-name'> {{data.attributes.name}} </div>
                 {{#if data.attributes.logo}}
-                    <div class='company-logo'> <img src='{{data.attributes.logo}}' width=100 height=100 alt="{{data.attributes.name}}'s logo"> </div>
+                <div class='company-logo'> <img src='{{data.attributes.logo}}' width=100 height=100 alt="{{data.attributes.name}}'s logo"> </div>
                 {{/if}}
-                <div class='company-name'> Name: {{data.attributes.name}} </div>
                 {{#if data.attributes.url}}
-                    <div class='company-url'>Website: <a href='{{data.attributes.url}}'> {{data.attributes.url}} </a></div>
+                <div class='company-url'>Website: <a href='{{data.attributes.url}}'> {{data.attributes.url}} </a></div>
                 {{/if}}
+            </div>
+            <div class='joblist'>
+                {{#eachCompanyJob job companyID}}
+                <div class='job'>
+                    <div id='jobtitle'><a href='/#!/jobs/{{id}}'> {{attributes.title}} </a></div>
+                    <div id='location'> Location: {{attributes.location}} </div>
+                    <div id='type'> Type: {{attributes.type}} </div>
+                </div>
+                {{/eachCompanyJob}}
             </div>
         </script>
 
