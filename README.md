@@ -39,3 +39,11 @@ The tests are split into 12 separate files so that we can run them automatically
 as part of the Github Classroom grading.  Initially the tests for levels 1 and 2
 are provided.  Otherse will be added later.  You may not change anything about
 the tests (we would be able to see from the git logs).
+
+## Level 3 and 4
+
+Details of these levels are now in the [assignment spec](doc/assignment.md).
+
+## Extension
+
+If you have implemented an extension to the base requirements, describe it here.

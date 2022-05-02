@@ -1,3 +1,11 @@
+<!--Joshua Santos
+    45203083
+    Index.html
+    .html file that serves as the basis for the website.
+    Credit to Steve Cassidy for the <header> code of the body.
+    Borrowed from the html code given from Assignment 1.
+-->
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -58,7 +66,7 @@
             <div class='joblist'>
                 {{#eachJob job}}
                     <div class='job'>
-                        <div id='jobtitle'><a href='/#!/jobs/{{id}}'> {{attributes.title}} </a></div>
+                        <div id='title'><a href='/#!/jobs/{{id}}' class="job-title" data-id="{{id}}"> {{attributes.title}} </a></div>
                         <div id='location'> Location: {{attributes.location}} </div>
                         <div id='type'> Type: {{attributes.type}} </div>
                     </div>
@@ -68,11 +76,11 @@
 
         <script id="job-template" type="text/x-handlebars-template">
             <div class='job-detailed'>
-                <div id='jobtitle'> {{data.attributes.title}} </div>
-                <div id='location'> Location: {{data.attributes.location}} </div>
-                <div id='type'> Type: {{data.attributes.type}} </div>
-                <div class='job-description'>{{{data.attributes.description}}}</div> 
-                <div id='company'>Company: <a href='/#!/companies/{{data.attributes.company.data.id}}'>{{data.attributes.company.data.attributes.name}} </a></div>
+                <div id='jobtitle'> {{job.attributes.title}} </div>
+                <div id='location'> Location: {{job.attributes.location}} </div>
+                <div id='type'> Type: {{job.attributes.type}} </div>
+                <div class='job-description'>{{{job.attributes.description}}}</div> 
+                <div id='company'>Company: <a href='/#!/companies/{{job.attributes.company.data.id}}'>{{job.attributes.company.data.attributes.name}} </a></div>
             </div>
         </script>
 
@@ -87,13 +95,13 @@
                 {{/if}}
             </div>
             <div class='joblist'>
-                {{#eachCompanyJob job companyID}}
+                {{#each job}}
                 <div class='job'>
-                    <div id='jobtitle'><a href='/#!/jobs/{{id}}'> {{attributes.title}} </a></div>
+                    <div id='title'><a href='/#!/jobs/{{id}}' class="job-title" data-id="{{id}}"> {{attributes.title}} </a></div>
                     <div id='location'> Location: {{attributes.location}} </div>
                     <div id='type'> Type: {{attributes.type}} </div>
                 </div>
-                {{/eachCompanyJob}}
+                {{/each}}
             </div>
         </script>
 

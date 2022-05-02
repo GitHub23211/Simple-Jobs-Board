@@ -1,24 +1,19 @@
-export {model}
+export class Model {
+    constructor(source) {
+        this.source = source
+        this.data = []
+    }
 
-const model = {
-
-    jobsInfo: './sample-data.json',
-
-    data: {
-        jobs: [],
-        companies: []
-    },
-
-    loadJobs: function() {
-        fetch(this.jobsInfo)
-        .then( 
+    fetchData() {
+        fetch(this.source)
+        .then(
             (response) => {
-            return response.json()
-        })
+                return response.json()
+            }
+        )
         .then(
             (data) => {
-                this.data.jobs = data.jobs;
-                this.data.companies = data.companies
+                this.data = data.data
                 let event = new CustomEvent("modelUpdated");
                 window.dispatchEvent(event)
             }

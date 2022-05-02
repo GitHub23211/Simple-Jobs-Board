@@ -48,11 +48,11 @@ this and extend the functionality to allow authentication and posting of jobs.
 * Auto marking: up to 5 marks (pass at least 10/12 tests); each test is worth
 0.5 marks for max of 5.
 
-### Functionality: Final Submission (10 marks) 
+### Functionality: Final Submission (10 marks)
 
-* Levels 3-4: 10 auto-tests (5 marks)
-* Level 5: manually marked (5 marks: 2 for FRs described and 3 marks 
-for creativity/any other features.) We have opened a separate submission box
+* Levels 3-4: passing auto-tests (5 marks)
+* Extensions: well documented additional features or capabilities. Must be very clearly 
+  mentioned in the README.md file so that we know what you have done. (5 marks)
 
 ### Code Review (10 marks) - each is worth 2 marks
 

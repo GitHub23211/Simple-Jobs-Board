@@ -6,7 +6,7 @@ This application will manage data about Jobs, Companies and Job Applications.
 
 You are
 provided with a JSON file containing sample data for each of these:
-[sample-data.json](../frontend/sample-data.json).  For levels 1 and 2 you will just
+[sample-data.json](frontend/sample-data.json).  For levels 1 and 2 you will just
 use the data in this JSON file directly (loaded via fetch).   You should
 not modify the data in any way as it will be used for testing.
 
@@ -42,7 +42,17 @@ A company is an organisation offering one or more jobs.
 
 When you introduce
 the Strapi server, you will load the sample data into the Strapi database. In
-addition you will use two more models as described here:
+addition you will use two more models as described below.
+
+To import the sample data into Strapi we have provided a scripts (`uploadData.js`)
+which you can call by running:
+
+```shell
+npm run sampledata
+```
+
+from the main project directory.  Note that the job and company `id` fields
+will change each time you import as Strapi assigns those itself.
 
 ### User
 
@@ -57,11 +67,7 @@ that as your backend (Level 3).  The fields of interest in User for us are:
 A job application is completed by a User to apply for a particular Job.  
 
 * `id` - a unique integer identifier for the application
-* `user` - relation with User, the user applying for the job
+* `user` - relation with User (from: `users-permissions`), the user applying for the job
 * `job` - relation with Job, the job applied for
 * `text` - the text of the job application letter
-* `status` - one of `submitted`, `accepted`, `rejected`
 
-When a job application is submitted, the status is set to `submitted`. Once
-it has been reviewed by the company, the status will change to `accepted` or
-`rejected`.

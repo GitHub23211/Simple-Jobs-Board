@@ -1,4 +1,4 @@
-# COMP2110 Bob's Jobs Frontend
+# COMP2110 Bob's Jobs Frontend and Backend
 
 # Level 1
 * Took style.css from Assignment 1 to use as the CSS Style for this assignment.
@@ -23,3 +23,12 @@
 * Added job description to individual job pages.
 * Styled individual job pages.
 * Modified companyView() to display the company logo and all jobs they have posted.
+
+# Level 3
+* Changed Model.js into a class so that I could create two objects:
+    * One object holds the data for all jobs and the other the for all companies
+* Added a findEntry function in main.js that finds the array index of a company/job from their respective arrays if the company/job id matches the pathInfo id.
+* Removed the eachCompanyJob helper function in view.js
+* Modified view.js so that it is compatible with the new data passed by the new Model objects
+* Modified index.html so that is compatible with the new data passed by the modified view,js functions
+* Added information at the top of each created .js script.
