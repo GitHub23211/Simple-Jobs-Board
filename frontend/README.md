@@ -4,7 +4,7 @@
 * Took style.css from Assignment 1 to use as the CSS Style for this assignment.
 * Took header code from Assignment 1 to create the header, navigation bar and search bar for the document.
 * Rough implementation of Level 1 code up to adding the "selected" class to the current page.
-    * Made three view functions that display a different message depending on the hash to work out how to use the router class.
+    * Made three view functions that display a different message depending on the hash URL to work out how to use the router class.
 * Used the classList property of an HTML element to dynamically add/remove a "selected" class to the last clicked nav-menu link.
 * Refactored view.js into an individual object.
 
@@ -38,6 +38,12 @@
     * formSearch disables the default behaviour of the form submit action
     * It then makes a call to a model.js function called searchEntries and passes the search term inputted by the user into this function.
 * Added a searchEntries function in model.js that creates a new array that inserts all jobs that contains a string passed as a parameter in their descriptions.
-    * Also dispatches a modelUpdated event and modifies the hash to include "/search" + the search term.
-* Added a route for the search hash in main.js.
+    * Also modifies the hash URL to include "/search" + the search term and then dispatches a modelUpdated event
+* Added a route for the search hash URL in main.js.
     * Only logs a dummy message + the pathInfo.id for now
+* Redid searchEntries model so that it does not modify the hash URL or dispatches an event
+* Created a new changeHash function in model.js that modifies the hash URL and dispatches an event
+    * This allows the website to now look for jobs by directly modifying the URL on top of using the search function.
+* Modified the function run when it changes to a search hash URL to use the homeView function in view.js. 
+    * Searching for a job shows the first 10 relevant jobs.
+    * Will create a new function that will show all relevant jobs instead.

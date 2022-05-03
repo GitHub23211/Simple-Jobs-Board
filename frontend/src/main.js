@@ -49,7 +49,7 @@ window.addEventListener("modelUpdated", () => {
     })
 
     router.get('/search', (pathInfo) => {
-        console.log("showing search page " + pathInfo.id)
+        View.homeView(jobsInfo.searchEntries(pathInfo.id))
     })
 
     router.route()
@@ -58,7 +58,7 @@ window.addEventListener("modelUpdated", () => {
 
 const formSearch = function() {
     event.preventDefault()
-    jobsInfo.searchEntries(this.elements[0].value)
+    jobsInfo.changeHash(this.elements[0].value)
 }
 
 const bindings = function() {

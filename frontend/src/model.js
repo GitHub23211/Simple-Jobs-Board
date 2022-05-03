@@ -26,6 +26,11 @@ export class Model {
         )
     }
 
+    changeHash(searchTerm) {
+        window.location.hash = "!/search/" + searchTerm
+        window.dispatchEvent(this.event)
+    }
+
     searchEntries(searchTerm) {
         let foundData = []
         let index = 0;
@@ -35,8 +40,6 @@ export class Model {
                 index++
             }
         }
-        window.location.hash = "!/search/" + searchTerm
-        window.dispatchEvent(this.event)
         return foundData
     }
 }

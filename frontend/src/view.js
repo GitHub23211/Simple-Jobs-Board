@@ -95,6 +95,5 @@ Handlebars.registerHelper('eachJob', function(data, options) {
     for(let i = 0; i < 10; i++) {
         template = template + options.fn(data[i])
     }
-    console.log(data)
     return template;
 })
