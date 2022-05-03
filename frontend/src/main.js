@@ -48,8 +48,23 @@ window.addEventListener("modelUpdated", () => {
         View.companyView(companies, companies.findIndex(findEntry))
     })
 
+    router.get('/search', (pathInfo) => {
+        console.log("showing search page " + pathInfo.id)
+    })
+
     router.route()
+    bindings()
 })
+
+const formSearch = function() {
+    event.preventDefault()
+    jobsInfo.searchEntries(this.elements[0].value)
+}
+
+const bindings = function() {
+    let target = document.getElementById("search-form")
+    target.onsubmit = formSearch
+}
 
 window.onload = () => {
     jobsInfo.fetchData()

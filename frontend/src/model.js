@@ -8,6 +8,7 @@ export class Model {
     constructor(source) {
         this.source = source
         this.data = []
+        this.event = new CustomEvent("modelUpdated")
     }
 
     fetchData() {
@@ -20,9 +21,22 @@ export class Model {
         .then(
             (data) => {
                 this.data = data.data
-                let event = new CustomEvent("modelUpdated");
-                window.dispatchEvent(event)
+                window.dispatchEvent(this.event)
             }
         )
+    }
+
+    searchEntries(searchTerm) {
+        let foundData = []
+        let index = 0;
+        for(let i = 0; i < this.data.length; i++) {
+            if(this.data[i].attributes.description.includes(searchTerm)) {
+                foundData[index] = this.data[i]
+                index++
+            }
+        }
+        window.location.hash = "!/search/" + searchTerm
+        window.dispatchEvent(this.event)
+        return foundData
     }
 }

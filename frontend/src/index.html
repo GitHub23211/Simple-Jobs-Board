@@ -3,7 +3,7 @@
     Index.html
     .html file that serves as the basis for the website.
     Credit to Steve Cassidy for the <header> code of the body.
-    Borrowed from the html code given from Assignment 1.
+    Borrowed and modified from the html code given from Assignment 1.
 -->
 
 <!DOCTYPE html>
@@ -34,13 +34,10 @@
                 </nav>
                                             
                 <div class="header-search">
-                    <form action="/search" role="search" class="search-form
-                    search-widget" id="nav-main-search">
-                    <label for="main-q" class="visually-hidden">Search Jobs</label>
-                    <input id="main-q"  type="search" class="search-input-field"
-                    name="q" placeholder="Site search..." value="">
-                    <input type="submit" class="search-button" aria-label="Search"
-                    value="Search"> 
+                    <form id="search-form">  
+                        <label for="search" class="search-label"> Search Jobs </label>
+                        <input type='text' id="search" placeholder="Enter keywords..." value="">
+                        <input type='submit' id="searchbutton" value="Search">
                     </form>
                 </div>
     

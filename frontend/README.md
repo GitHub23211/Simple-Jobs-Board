@@ -33,3 +33,11 @@
 * Modified index.html so that is compatible with the new data passed by the modified view,js functions
 * Added information at the top of each created .js script.
 * Added a sort function to the eachJob helper function in view.js that sorts the job array from most recent according to the publishedAt attribute of each job.
+* Modified the header-search div html code to be more simple and better suit this assignment.
+* Added a bindings function in main that rebinds the form submit action to a function called formSearch
+    * formSearch disables the default behaviour of the form submit action
+    * It then makes a call to a Model function called searchEntries and passes the search term inputted by the user into this function.
+* Added a searchEntries function under model that creates a new array that inserts all jobs that contains a string passed as a parameter in their descriptions.
+    * Also dispatches a modelUpdated event and modifies the hash to include "/search" + the search term.
+* Added a route for the search hash in main.js.
+    * Only logs a dummy message + the pathInfo.id
