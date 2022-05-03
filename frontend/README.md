@@ -46,4 +46,4 @@
     * This allows the website to now look for jobs by directly modifying the URL on top of using the search function.
 * Modified the function run when it changes to a search hash URL to use the homeView function in view.js. 
     * Searching for a job shows the first 10 relevant jobs.
-    * Will create a new function that will show all relevant jobs instead.
+    * Will create a new function that will show all relevant jobs soon.
