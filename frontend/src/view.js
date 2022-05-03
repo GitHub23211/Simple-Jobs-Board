@@ -75,7 +75,7 @@ const selectedNav = function(id) {
 //Takes a job array from the object in sample-data.json and inserts its details
 //into the "job-template" Handlebar template
 //for up to 10 job arrays
-//Also sorts the job array before inserting each job into the tempalte 
+//Also sorts the job array before inserting each job into the template 
 //from most recent according to its publishedAt attribute
 Handlebars.registerHelper('eachJob', function(data, options) {
     let template = ""

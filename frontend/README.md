@@ -15,7 +15,7 @@
     * Made sure to only populate the routes object and call the route() function from router.js once modelUpdated event is fully complete.
 * Created a Handlebars template to correctly display the first 10 jobs.
     * Created a custom Handlebars helper (jobEach()) that has a similar implementation to the #each helper but stops after 10 iterations.
-* Modified Handlebars template to include a hpyerlink tag for each job title that is uniquely identified by their job id.
+* Modified Handlebars template to include a hyperlink tag for each job title that is uniquely identified by their job id.
 * Created a basic individual jobs view and company view functions. Does not display all required information yet.
 * Updated the data variable in model to hold arrays for both jobs and companies. These arrays are then accessed by the jobView and companyView functions respectively.
 * Refactored view.js again to be a bit neater and less repetitive.
@@ -30,14 +30,14 @@
 * Added a findEntry function in main.js that finds the array index of a company/job from their respective arrays if the company/job id matches the pathInfo id.
 * Removed the eachCompanyJob helper function in view.js
 * Modified view.js so that it is compatible with the new data passed by the new Model objects
-* Modified index.html so that is compatible with the new data passed by the modified view,js functions
+* Modified index.html so that is compatible with the new data passed by the modified view.js functions
 * Added information at the top of each created .js script.
 * Added a sort function to the eachJob helper function in view.js that sorts the job array from most recent according to the publishedAt attribute of each job.
 * Modified the header-search div html code to be more simple and better suit this assignment.
-* Added a bindings function in main that rebinds the form submit action to a function called formSearch
+* Added a bindings function in main.js that rebinds the form submit action to a function called formSearch
     * formSearch disables the default behaviour of the form submit action
-    * It then makes a call to a Model function called searchEntries and passes the search term inputted by the user into this function.
-* Added a searchEntries function under model that creates a new array that inserts all jobs that contains a string passed as a parameter in their descriptions.
+    * It then makes a call to a model.js function called searchEntries and passes the search term inputted by the user into this function.
+* Added a searchEntries function in model.js that creates a new array that inserts all jobs that contains a string passed as a parameter in their descriptions.
     * Also dispatches a modelUpdated event and modifies the hash to include "/search" + the search term.
 * Added a route for the search hash in main.js.
-    * Only logs a dummy message + the pathInfo.id
+    * Only logs a dummy message + the pathInfo.id for now
