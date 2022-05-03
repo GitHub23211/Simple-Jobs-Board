@@ -32,3 +32,4 @@
 * Modified view.js so that it is compatible with the new data passed by the new Model objects
 * Modified index.html so that is compatible with the new data passed by the modified view,js functions
 * Added information at the top of each created .js script.
+* Added a sort function to the eachJob helper function in view.js that sorts the job array from most recent according to the publishedAt attribute of each job.

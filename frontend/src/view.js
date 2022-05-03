@@ -75,10 +75,26 @@ const selectedNav = function(id) {
 //Takes a job array from the object in sample-data.json and inserts its details
 //into the "job-template" Handlebar template
 //for up to 10 job arrays
+//Also sorts the job array before inserting each job into the tempalte 
+//from most recent according to its publishedAt attribute
 Handlebars.registerHelper('eachJob', function(data, options) {
     let template = ""
+    data.sort(
+        (a, b) => {
+            let date1 = Date.parse(a.attributes.publishedAt)
+            let date2 = Date.parse(b.attributes.publishedAt)
+            if(date1 > date2) {
+                return -1
+            }
+            if(date1 < date2) {
+                return 1
+            }
+            return 0
+        }
+    )
     for(let i = 0; i < 10; i++) {
         template = template + options.fn(data[i])
     }
+    console.log(data)
     return template;
 })
