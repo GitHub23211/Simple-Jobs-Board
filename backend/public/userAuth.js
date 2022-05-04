@@ -20,7 +20,8 @@ const userAuth = {
         .then(
             (data) => {
                 console.log("User logged in")
-                console.log(data)
+                this.userData = data
+                console.log(this.userData)
                 window.dispatchEvent(new CustomEvent("modelUpdated"))
             }
         )

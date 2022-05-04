@@ -68,11 +68,11 @@
 
         <script id="job-template" type="text/x-handlebars-template">
             <div class='job-detailed'>
-                <div id='jobtitle'> {{data.attributes.title}} </div>
-                <div id='location'> Location: {{data.attributes.location}} </div>
-                <div id='type'> Type: {{data.attributes.type}} </div>
+                <div id='jobtitle'>{{data.attributes.title}}</div>
+                <div id='location'>Location: {{data.attributes.location}}</div>
+                <div id='type'>Type: {{data.attributes.type}}</div>
                 <div class='job-description'>{{{data.attributes.description}}}</div> 
-                <div id='company'>Company: <a href='/#!/companies/{{data.attributes.company.data.id}}'>{{data.attributes.company.data.attributes.name}} </a></div>
+                <div id='company'>Company: <a href='/#!/companies/{{data.attributes.company.data.id}}'>{{data.attributes.company.data.attributes.name}}</a></div>
             </div>
         </script>
 
