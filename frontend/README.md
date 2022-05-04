@@ -47,3 +47,5 @@
 * Modified the function run when it changes to a search hash URL to use the homeView function in view.js. 
     * Searching for a job shows the first 10 relevant jobs.
     * Will create a new function that will show all relevant jobs soon.
+* Created a searchView function that displays all jobs returned by searchEntries in model.js using a Handlebars template called "search-template" in index.html
+    * "search-template" checks if the array is empty and either displays a view of all relevant jobs or a generic error page that informs the user that their search term did not find any jobs

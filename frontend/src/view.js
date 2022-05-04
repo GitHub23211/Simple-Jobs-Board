@@ -31,12 +31,17 @@ const View = {
         "Applicant Help")
     },
 
-        
-    homeView: function(data) {
+    homeView: function(data, limit) {
         let target = document.getElementById('main')
         let template = Handlebars.compile(document.getElementById("home-template").innerText)
         target.innerHTML = template({job:data})
         selectedNav("Home")
+    },
+
+    searchView: function(data, searchTerm) {
+        let target = document.getElementById('main')
+        let template = Handlebars.compile(document.getElementById("search-template").innerText)
+        target.innerHTML = template({job:data, searchTerm:searchTerm, numResults:data.length})
     },
     
     jobView: function(data, id) {

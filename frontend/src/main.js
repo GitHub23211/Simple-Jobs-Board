@@ -49,7 +49,7 @@ window.addEventListener("modelUpdated", () => {
     })
 
     router.get('/search', (pathInfo) => {
-        View.homeView(jobsInfo.searchEntries(pathInfo.id))
+        View.searchView(jobsInfo.searchEntries(pathInfo.id), pathInfo.id)
     })
 
     router.route()
