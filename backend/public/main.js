@@ -52,8 +52,8 @@ window.addEventListener("modelUpdated", () => {
     router.get('/search', (pathInfo) => {
         View.searchView(jobsInfo.searchEntries(pathInfo.id), pathInfo.id)
     })
-
-    View.loginView()
+    
+    View.loginView(userAuth.userData)
 
     router.route()
     bindings()
@@ -73,12 +73,25 @@ const auth = function () {
     userAuth.login(authInfo)
 }
 
+const logout = function() {
+    userAuth.userData = null
+    window.dispatchEvent(new CustomEvent("modelUpdated"))
+}
+
 const bindings = function() {
     let searchForm = document.getElementById("search-form")
     searchForm.onsubmit = searchJobs
 
-    let loginForm = document.getElementById("login-form")
-    loginForm.onsubmit = auth
+    if(!userAuth.getUser()) {
+        let loginForm = document.getElementById("login-form")
+        loginForm.onsubmit = auth
+    }
+
+    if(userAuth.getUser()) {
+        let logoutButton = document.getElementById("logoutbutton")
+        logoutButton.onclick = logout
+    }
+
 }
 
 window.onload = () => {

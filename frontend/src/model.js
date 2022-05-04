@@ -1,3 +1,9 @@
+/*  Joshua Santos
+    45203083
+    Model.js
+    .js that contains the functions and fields for the Model class
+*/
+
 export {model}
 
 const model = {

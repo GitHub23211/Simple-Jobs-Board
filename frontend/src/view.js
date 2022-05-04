@@ -1,3 +1,9 @@
+/*  Joshua Santos
+    45203083
+    View.js
+    View module of the website
+*/
+
 export {view}
 
 const view = {

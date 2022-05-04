@@ -30,4 +30,11 @@
         * It now calls a function called auth() in main.js instead that turns the values gotten from the username and password textboxes into a JSON object and passes it to a function in userauth.js called login()
 * userauth.js is an object that stores a user's data and a function called login()
     * login() makes a POST request to Strapi's authentication api and returns a confirmed user's data, prints it to the console and then dispatches a modelUpdated event (for now)
-
+* Modified login-template to include a logout button and a message that informs the user they have logged in
+* Added a logout() function to main.js that is bound to the logout button's onclick. It sets the userData field in the userAuth object to null and dispatches a modelUpdated event so that the login form appears again
+* Added a window.alert call in login that is called when Strapi sends back an error. This alert that tells the user that the username or password inputted is invalid.
+* Added a getJWT() and getUser() function in userAuth.js.
+    * getJWT() will be used to get the JSON web token from the user data sent by the backend
+    * getUser() checks if the userData field is null
+    * It's current use is to inform the controller that if the user is logged, do not search for a login-form element (as it will be null) and to load the logout button's onclick with the logout() function.
+    

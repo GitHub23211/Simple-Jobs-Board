@@ -61,6 +61,7 @@ const View = {
     loginView: function(user) {
         let target = document.getElementById('header-auth')
         let template = Handlebars.compile(document.getElementById("login-template").innerText)
+        console.log(user)
         target.innerHTML = template({user:user})
     }
 }

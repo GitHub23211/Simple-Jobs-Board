@@ -1,3 +1,9 @@
+/*  Joshua Santos
+    45203083
+    Main.js
+    Controller module of the website
+*/
+
 import {Router} from './router.js'
 import {model} from './model.js'
 import {view} from './view.js'

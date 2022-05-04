@@ -125,7 +125,8 @@
         <script id="login-template" type="text/x-handlebars-template">
             {{#if user}}
                 <div id="logged-in">
-                    Welcome, {{user.username}}
+                    Logged in as {{user.user.username}}
+                    <button id="logoutbutton">Logout</button>
                 </div>
             {{else}}
                 <form id="login-form">

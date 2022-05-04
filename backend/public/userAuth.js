@@ -1,7 +1,7 @@
 export {userAuth}
 
 const userAuth = {
-    userData: {},
+    userData: null,
 
     login: function(authInfo) {
         fetch('http://localhost:1337/api/auth/local', {
@@ -19,11 +19,26 @@ const userAuth = {
         )
         .then(
             (data) => {
-                console.log("User logged in")
-                this.userData = data
-                console.log(this.userData)
-                window.dispatchEvent(new CustomEvent("modelUpdated"))
+                if(data.error) {
+                    window.alert("Invalid username or password")
+                }
+                else {
+                    console.log("User logged in")
+                    this.userData = data
+                    window.dispatchEvent(new CustomEvent("modelUpdated"))
+                }
             }
         )
+    },
+
+    getJWT: function() {
+
+    },
+
+    getUser: function() {
+        if(this.userData) {
+            return true
+        }
+        return false
     }
 }
