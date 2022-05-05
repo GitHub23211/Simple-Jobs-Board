@@ -4,9 +4,9 @@
     View module of the website
 */
 
-export {view}
+export {View}
 
-const view = {
+const View = {
     errorView: function() {
         let target = document.getElementById('main')
         let template = '<h1> Page not found </h1>'
@@ -26,13 +26,12 @@ const view = {
     },
 
         
-    helpView: function(html, selectedNav) {
+    helpView: function() {
         this.applyTemplate("text-template", `Be sure to he honest in your application!`,
         "Applicant Help")
     },
 
-        
-    homeView: function(data) {
+    homeView: function(data, limit) {
         let target = document.getElementById('main')
         let template = Handlebars.compile(document.getElementById("home-template").innerText)
         target.innerHTML = template({job:data})
@@ -41,15 +40,29 @@ const view = {
     
     jobView: function(data, id) {
         let target = document.getElementById('main')
-        let list = data[id];
+        let job = data[id];
         let template = Handlebars.compile(document.getElementById("job-template").innerText)
-        target.innerHTML = template({data: list})
+        target.innerHTML = template({job: job})
     },
 
     companyView: function(data, id) {
         let target = document.getElementById('main')
         let template = Handlebars.compile(document.getElementById("company-template").innerText)
-        target.innerHTML = template({data: data.companies[id], job:data.jobs, companyID:(id+data.companies[0].id)})
+        let compJobList = data[id].attributes.jobs.data
+        target.innerHTML = template({data: data[id], job:compJobList})
+    },
+
+    searchView: function(data, searchTerm) {
+        let target = document.getElementById('main')
+        let template = Handlebars.compile(document.getElementById("search-template").innerText)
+        target.innerHTML = template({job:data, searchTerm:searchTerm, numResults:data.length})
+    },
+
+    loginView: function(user) {
+        let target = document.getElementById('header-auth')
+        let template = Handlebars.compile(document.getElementById("login-template").innerText)
+        console.log(user)
+        target.innerHTML = template({user:user})
     }
 }
 
@@ -71,22 +84,28 @@ const selectedNav = function(id) {
 }
 
 //Custom Handlebars helper function called "eachJob"
-//It basically takes the job array in sample-data.json and implements "job-template"
-//for a certain number of job entries up until the "limit" paramater.
+//Takes a job array from the object in sample-data.json and inserts its details
+//into the "job-template" Handlebar template
+//for up to 10 job arrays
+//Also sorts the job array before inserting each job into the template 
+//from most recent according to its publishedAt attribute
 Handlebars.registerHelper('eachJob', function(data, options) {
     let template = ""
+    data.sort(
+        (a, b) => {
+            let date1 = Date.parse(a.attributes.publishedAt)
+            let date2 = Date.parse(b.attributes.publishedAt)
+            if(date1 > date2) {
+                return -1
+            }
+            if(date1 < date2) {
+                return 1
+            }
+            return 0
+        }
+    )
     for(let i = 0; i < 10; i++) {
         template = template + options.fn(data[i])
-    }
-    return template;
-})
-
-Handlebars.registerHelper('eachCompanyJob', function(data, id, options) {
-    let template = ""
-    for(let i = 0; i < data.length; i++) {
-        if(data[i].attributes.company.data.id == id) {
-            template = template + options.fn(data[i])
-        }
     }
     return template;
 })

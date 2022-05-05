@@ -5,41 +5,96 @@
 */
 
 import {Router} from './router.js'
-import {model} from './model.js'
-import {view} from './view.js'
+import {Model} from './model.js'
+import {View} from './view.js'
+import {userAuth} from './userAuth.js'
 
-const router = new Router(view.errorView)
+const router = new Router(View.errorView)
+const jobsInfo = new Model(`http://localhost:1337/api/jobs?populate=*`)
+const compInfo = new Model(`http://localhost:1337/api/companies?populate=*`)
+
 window.addEventListener("modelUpdated", () => {
-    let data = model.data
-    let jobs = model.data.jobs
+    let jobs = jobsInfo.data
+    let companies = compInfo.data
 
     router.get('/', () => {
-        view.homeView(jobs)
+        View.homeView(jobs)
     })
 
     router.get('/#', () => {
-        view.homeView(jobs)
+        View.homeView(jobs)
     })
     
     router.get('/about', () => {
-        view.aboutView()
+        View.aboutView()
     })
     
     router.get('/help', () => {
-        view.helpView();
+        View.helpView();
     })
 
     router.get('/jobs', (pathInfo) => {
-        view.jobView(jobs, pathInfo.id - jobs[0].id)
+        const findEntry = (data) => {
+            return pathInfo.id == data.id
+        }
+
+        View.jobView(jobs, jobs.findIndex(findEntry))
     })
 
     router.get('/companies', (pathInfo) => {
-        view.companyView(data, pathInfo.id - data.companies[0].id)
+        const findEntry = (data) => {
+            return pathInfo.id == data.id
+        }
+
+        View.companyView(companies, companies.findIndex(findEntry))
     })
 
+    router.get('/search', (pathInfo) => {
+        View.searchView(jobsInfo.searchEntries(pathInfo.id), pathInfo.id)
+    })
+    
+    View.loginView(userAuth.userData)
+
     router.route()
+    bindings()
 })
 
+const searchJobs = function() {
+    event.preventDefault()
+    jobsInfo.changeHash(this.elements[0].value)
+}
+
+const auth = function () {
+    event.preventDefault()
+    const authInfo = {
+       identifier: this.elements['username'].value,
+       password: this.elements['password'].value 
+    }
+    userAuth.login(authInfo)
+}
+
+const logout = function() {
+    userAuth.userData = null
+    window.dispatchEvent(new CustomEvent("modelUpdated"))
+}
+
+const bindings = function() {
+    let searchForm = document.getElementById("search-form")
+    searchForm.onsubmit = searchJobs
+
+    if(!userAuth.getUser()) {
+        let loginForm = document.getElementById("login-form")
+        loginForm.onsubmit = auth
+    }
+
+    if(userAuth.getUser()) {
+        let logoutButton = document.getElementById("logoutbutton")
+        logoutButton.onclick = logout
+    }
+
+}
+
 window.onload = () => {
-    model.loadJobs()
+    jobsInfo.fetchData()
+    compInfo.fetchData()
 }

@@ -34,22 +34,14 @@
                 </nav>
                                             
                 <div class="header-search">
-                    <form action="/search" role="search" class="search-form
-                    search-widget" id="nav-main-search">
-                    <label for="main-q" class="visually-hidden">Search Jobs</label>
-                    <input id="main-q"  type="search" class="search-input-field"
-                    name="q" placeholder="Site search..." value="">
-                    <input type="submit" class="search-button" aria-label="Search"
-                    value="Search"> 
+                    <form id="search-form">  
+                        <label for="search" class="search-label"> Search Jobs </label>
+                        <input type='text' id="search" placeholder="Enter keywords..." value="">
+                        <input type='submit' id="searchbutton" value="Search">
                     </form>
                 </div>
     
-                <div class="header-auth">
-                    <span>
-                        <a href="/#!/login" id="login-link">Sign In</a> 
-                        or
-                        <a href="/#!/register" id="register-link">Register</a>
-                    </span>
+                <div id="header-auth">
                 </div>
             </div>
         </header>
@@ -66,7 +58,7 @@
             <div class='joblist'>
                 {{#eachJob job}}
                     <div class='job'>
-                        <div id='jobtitle'><a href='/#!/jobs/{{id}}'> {{attributes.title}} </a></div>
+                        <div id='title'><a href='/#!/jobs/{{id}}' class="job-title" data-id="{{id}}"> {{attributes.title}} </a></div>
                         <div id='location'> Location: {{attributes.location}} </div>
                         <div id='type'> Type: {{attributes.type}} </div>
                     </div>
@@ -76,11 +68,11 @@
 
         <script id="job-template" type="text/x-handlebars-template">
             <div class='job-detailed'>
-                <div id='jobtitle'>{{data.attributes.title}}</div>
-                <div id='location'>Location: {{data.attributes.location}}</div>
-                <div id='type'>Type: {{data.attributes.type}}</div>
-                <div class='job-description'>{{{data.attributes.description}}}</div> 
-                <div id='company'>Company: <a href='/#!/companies/{{data.attributes.company.data.id}}'>{{data.attributes.company.data.attributes.name}}</a></div>
+                <div id='jobtitle'> {{job.attributes.title}} </div>
+                <div id='location'> Location: {{job.attributes.location}} </div>
+                <div id='type'> Type: {{job.attributes.type}} </div>
+                <div class='job-description'>{{{job.attributes.description}}}</div> 
+                <div id='company'>Company: <a href='/#!/companies/{{job.attributes.company.data.id}}'>{{job.attributes.company.data.attributes.name}} </a></div>
             </div>
         </script>
 
@@ -95,15 +87,55 @@
                 {{/if}}
             </div>
             <div class='joblist'>
-                {{#eachCompanyJob job companyID}}
+                {{#each job}}
                 <div class='job'>
-                    <div id='jobtitle'><a href='/#!/jobs/{{id}}'> {{attributes.title}} </a></div>
+                    <div id='title'><a href='/#!/jobs/{{id}}' class="job-title" data-id="{{id}}"> {{attributes.title}} </a></div>
                     <div id='location'> Location: {{attributes.location}} </div>
                     <div id='type'> Type: {{attributes.type}} </div>
                 </div>
-                {{/eachCompanyJob}}
+                {{/each}}
             </div>
         </script>
 
+        <script id="search-template" type="text/x-handlebars-template">
+            {{#if job}}
+                <div class="search-header">
+                    <h1>"{{searchTerm}}" brought up {{numResults}} results</h1> 
+                </div>
+                <div class='joblist'>
+                    {{#each job}}
+                        <div class='job'>
+                            <div id='title'><a href='/#!/jobs/{{id}}' class="job-title" data-id="{{id}}"> {{attributes.title}} </a></div>
+                            <div id='location'> Location: {{attributes.location}} </div>
+                            <div id='type'> Type: {{attributes.type}} </div>
+                        </div>
+                    {{/each}}
+                </div>
+            {{else}} 
+            <div class="search-header">
+                <h1>We couldn't find anything related to "{{searchTerm}}"</h1> 
+                <p>Try:</p>
+                <ul>
+                    <li>Checking for spelling errors</li>
+                </ul>
+            </div>
+            {{/if}}
+        </script>
+
+        <script id="login-template" type="text/x-handlebars-template">
+            {{#if user}}
+                <div id="logged-in">
+                    Logged in as {{user.user.username}}
+                    <button id="logoutbutton">Logout</button>
+                </div>
+            {{else}}
+                <form id="login-form">
+                    <label for="login" class="login-label"> Sign In </label>
+                    <input type="text" id="username" name="username" value="">
+                    <input type="password" id="password" name="password" value="">
+                    <input type="submit" id="loginbutton" value="Login">
+                </form> 
+            {{/if}}
+        </script>
     </body>
 </html>
