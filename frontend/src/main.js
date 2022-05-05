@@ -5,21 +5,15 @@
 */
 
 import {Router} from './router.js'
-import {Model} from './model.js'
 import {View} from './view.js'
 import {userAuth} from './userAuth.js'
+import {Model} from './model.js'
 
 const router = new Router(View.errorView)
-const jobsInfo = new Model(`http://localhost:1337/api/jobs?populate=*`)
-const compInfo = new Model(`http://localhost:1337/api/companies?populate=*`)
 
 window.addEventListener("modelUpdated", () => {
-    let jobs = jobsInfo.data
-    let companies = compInfo.data
-    
-    if(userAuth.getUser()) {
-        View.jwt = userAuth.getJWT()
-    }
+    let jobs = Model.data.jobs
+    let companies = Model.data.companies
 
     router.get('/', () => {
         View.homeView(jobs)
@@ -42,7 +36,7 @@ window.addEventListener("modelUpdated", () => {
             return pathInfo.id == data.id
         }
 
-        View.jobView(jobs, jobs.findIndex(findEntry), userAuth.getUser())
+        View.jobView(jobs, jobs.findIndex(findEntry))
     })
 
     router.get('/companies', (pathInfo) => {
@@ -54,11 +48,7 @@ window.addEventListener("modelUpdated", () => {
     })
 
     router.get('/search', (pathInfo) => {
-        View.searchView(jobsInfo.searchEntries(pathInfo.id), pathInfo.id)
-    })
-
-    router.get('/application', () => {
-        View.jobAppView()
+        View.searchView(Model.searchEntries(pathInfo.id), pathInfo.id)
     })
 
     View.loginView(userAuth.userData)
@@ -69,7 +59,7 @@ window.addEventListener("modelUpdated", () => {
 
 const searchJobs = function() {
     event.preventDefault()
-    jobsInfo.changeHash(this.elements[0].value)
+    Model.changeHash(this.elements[0].value)
 }
 
 const auth = function () {
@@ -87,8 +77,13 @@ const logout = function() {
 }
 
 const applyJob = function() {
-    window.location.hash = "!/application"
-    window.dispatchEvent(new CustomEvent("modelUpdated"))
+    View.jobAppView()
+    window.dispatchEvent(new HashChangeEvent("hashUpdated"))
+}
+
+const submitApplication = function() {
+    console.log("Clicked submit")
+    console.log(this)
 }
 
 const bindings = function() {
@@ -104,12 +99,17 @@ const bindings = function() {
         let logoutButton = document.getElementById("logoutbutton")
         logoutButton.onclick = logout
         let applyFormButton = document.getElementById("apply-button")
-        applyFormButton.onclick = applyJob;
+        if(applyFormButton) {
+            applyFormButton.onclick = applyJob
+        }
     }
 
+    let submitAppButton = document.getElementById("submitApp-button")
+    if(submitAppButton) {
+        submitAppButton.onsubmit = submitApplication
+    }
 }
 
 window.onload = () => {
-    jobsInfo.fetchData()
-    compInfo.fetchData()
+    Model.fetchData()
 }

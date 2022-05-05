@@ -32,6 +32,10 @@ const userAuth = {
         )
     },
 
+    submitApp: function() {
+
+    },
+
     getJWT: function() {
         if(this.userData) {
             return this.userData.jwt

@@ -38,11 +38,11 @@ const View = {
         selectedNav("Home")
     },
     
-    jobView: function(data, id, user) {
+    jobView: function(data, id) {
         let target = document.getElementById('main')
         let job = data[id];
         let template = Handlebars.compile(document.getElementById("job-template").innerText)
-        target.innerHTML = template({job: job, user:user})
+        target.innerHTML = template({job: job})
     },
 
     companyView: function(data, id) {
@@ -68,7 +68,7 @@ const View = {
     jobAppView: function() {
         let target = document.getElementById('main')
         let template = Handlebars.compile(document.getElementById("jobApp-template").innerText)
-        target.innerHTML = template()
+        target.innerHTML = template()+target.innerHTML
     }
 }
 

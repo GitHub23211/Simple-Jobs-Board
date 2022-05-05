@@ -1,42 +1,46 @@
-/*  Joshua Santos
-    45203083
-    Model.js
-    .js that contains the functions and fields for the Model class
-*/
+export {Model}
 
-export class Model {
-    constructor(source) {
-        this.source = source
-        this.data = []
-        this.event = new CustomEvent("modelUpdated")
-    }
+const Model = {
 
-    fetchData() {
-        fetch(this.source)
-        .then(
-            (response) => {
-                return response.json()
-            }
+    jobsResource: `http://localhost:1337/api/jobs`,
+    compResource: `http://localhost:1337/api/companies`,
+
+    event: new CustomEvent("modelUpdated"),
+
+    data: {
+        jobs: [],
+        companies: []
+    },
+
+    fetchData: function() {
+        Promise.all(
+            [
+                fetch(this.jobsResource)
+                .then((response) => response.json()),
+                fetch(this.compResource)
+                .then((response) => response.json()),
+            ]
         )
         .then(
-            (data) => {
-                this.data = data.data
+            (responses) => {
+                this.data.jobs = responses[0].data
+                this.data.companies = responses[1].data
                 window.dispatchEvent(this.event)
             }
         )
-    }
+    },
 
-    changeHash(searchTerm) {
+    changeHash: function(searchTerm) {
         window.location.hash = "!/search/" + searchTerm
         window.dispatchEvent(this.event)
-    }
+    },
 
-    searchEntries(searchTerm) {
+    searchEntries: function(searchTerm) {
         let foundData = []
         let index = 0;
-        for(let i = 0; i < this.data.length; i++) {
-            if(this.data[i].attributes.description.includes(searchTerm)) {
-                foundData[index] = this.data[i]
+        for(let i = 0; i < this.data.jobs.length; i++) {
+            if(this.data.jobs[i].attributes.description.includes(searchTerm)) {
+                foundData[index] = this.data.jobs[i]
                 index++
             }
         }
