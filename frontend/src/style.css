@@ -107,14 +107,13 @@ a:hover {
 
 .job {
     display: grid;
-    grid-template-columns: 1fr 2fr;
     grid-template-rows: repeat(5, 1fr);
     column-gap: 5px;
     background-color: #fafafa81;
     border: 2px groove black;
-    width: 50vw;
-    height: 350px;
-    margin-left: 22.1vw;
+    width: 25vw;
+    height: 30vh;
+    margin: auto;
     border-radius: 5px;
     margin-bottom: 1em;
 }
@@ -152,6 +151,12 @@ a:hover {
     margin-top: 1em;
     margin-left: 1em;
     font-weight: bold;
+}
+
+.job #apply-job {
+    grid-column: 1;
+    margin-top: 1em;
+    margin-left: 13em;
 }
 
 .job-detailed {
