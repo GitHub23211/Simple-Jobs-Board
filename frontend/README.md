@@ -64,7 +64,7 @@
     * It's current use is to inform the controller that if the user is logged, do not search for a login-form element (as it will be null) and to load the logout button's onclick with the logout() function.
 * Added a button on a detailed job's page that says Apply for Job. Changed the onclick function of this button to a function called applyJob in main.js.
     * applyJob calls a view function called jobAppView that concatenates the innerHTMl of the page with a template called "jobApp-template" 
-        * Essentially, it places a textarea input and a submit button form on top of the job application
+        * Essentially, it places a textarea input and a submit button form on top of the job application page
     * applyJob then dispatches a hashChange event to load the newly concatenated HTML code
     * The onsubmit function of this submit button has been changed to submitApplication() found in main.ks
         * For now, submitApplication() just console logs a message to tell me the button is working.
