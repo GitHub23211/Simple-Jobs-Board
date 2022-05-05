@@ -37,6 +37,7 @@ window.addEventListener("modelUpdated", () => {
         }
 
         View.jobView(jobs, jobs.findIndex(findEntry))
+        bindJobAppButton()
     })
 
     router.get('/companies', (pathInfo) => {
@@ -79,11 +80,16 @@ const logout = function() {
 const applyJob = function() {
     View.jobAppView()
     window.dispatchEvent(new HashChangeEvent("hashUpdated"))
+    let jobAppSubmit = document.getElementById("jobApp-form")
+    if(jobAppSubmit) {
+        jobAppSubmit.onsubmit = submitApplication
+    }
 }
 
 const submitApplication = function() {
+    event.preventDefault()
     console.log("Clicked submit")
-    console.log(this)
+    console.log(this.elements[0].value)
 }
 
 const bindings = function() {
@@ -98,15 +104,15 @@ const bindings = function() {
     if(userAuth.getUser()) {
         let logoutButton = document.getElementById("logoutbutton")
         logoutButton.onclick = logout
+    }
+}
+
+const bindJobAppButton = function() {
+    if(userAuth.getUser()) {
         let applyFormButton = document.getElementById("apply-button")
         if(applyFormButton) {
             applyFormButton.onclick = applyJob
         }
-    }
-
-    let submitAppButton = document.getElementById("submitApp-button")
-    if(submitAppButton) {
-        submitAppButton.onsubmit = submitApplication
     }
 }
 

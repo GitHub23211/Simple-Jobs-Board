@@ -70,3 +70,6 @@
         * For now, submitApplication() just console logs a message to tell me the button is working.
 * Removed the class structure of model.js and replaced it with a prototype object structure.
 * Added getUser() and getJWT() functions in userAuth.js to be used later for authenticated requests and to show different views when a user is logged in
+* Fixed accidentally rebinding the onsubmit of the job application submit input element to rebinding the onsubmit of the form element
+* Now checks everytime a detailed job application page is loaded if the user is logged
+    * Used later to hide/show the jobApp element
