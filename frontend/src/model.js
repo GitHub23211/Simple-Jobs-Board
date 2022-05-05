@@ -2,8 +2,8 @@ export {Model}
 
 const Model = {
 
-    jobsResource: `http://localhost:1337/api/jobs`,
-    compResource: `http://localhost:1337/api/companies`,
+    jobsResource: `http://localhost:1337/api/jobs?populate=*`,
+    compResource: `http://localhost:1337/api/companies?populate=*`,
 
     event: new CustomEvent("modelUpdated"),
 
