@@ -16,6 +16,10 @@ const compInfo = new Model(`http://localhost:1337/api/companies?populate=*`)
 window.addEventListener("modelUpdated", () => {
     let jobs = jobsInfo.data
     let companies = compInfo.data
+    
+    if(userAuth.getUser()) {
+        View.jwt = userAuth.getJWT()
+    }
 
     router.get('/', () => {
         View.homeView(jobs)
@@ -38,7 +42,7 @@ window.addEventListener("modelUpdated", () => {
             return pathInfo.id == data.id
         }
 
-        View.jobView(jobs, jobs.findIndex(findEntry))
+        View.jobView(jobs, jobs.findIndex(findEntry), userAuth.getUser())
     })
 
     router.get('/companies', (pathInfo) => {
@@ -52,7 +56,11 @@ window.addEventListener("modelUpdated", () => {
     router.get('/search', (pathInfo) => {
         View.searchView(jobsInfo.searchEntries(pathInfo.id), pathInfo.id)
     })
-    
+
+    router.get('/application', () => {
+        View.jobAppView()
+    })
+
     View.loginView(userAuth.userData)
 
     router.route()
@@ -78,6 +86,11 @@ const logout = function() {
     window.dispatchEvent(new CustomEvent("modelUpdated"))
 }
 
+const applyJob = function() {
+    window.location.hash = "!/application"
+    window.dispatchEvent(new CustomEvent("modelUpdated"))
+}
+
 const bindings = function() {
     let searchForm = document.getElementById("search-form")
     searchForm.onsubmit = searchJobs
@@ -90,6 +103,8 @@ const bindings = function() {
     if(userAuth.getUser()) {
         let logoutButton = document.getElementById("logoutbutton")
         logoutButton.onclick = logout
+        let applyFormButton = document.getElementById("apply-button")
+        applyFormButton.onclick = applyJob;
     }
 
 }

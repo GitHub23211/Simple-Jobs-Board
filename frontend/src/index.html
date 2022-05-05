@@ -61,9 +61,6 @@
                         <div id='title'><a href='/#!/jobs/{{id}}' class="job-title" data-id="{{id}}"> {{attributes.title}} </a></div>
                         <div id='location'> Location: {{attributes.location}} </div>
                         <div id='type'> Type: {{attributes.type}} </div>
-                        <div id="apply-job">
-                            <button id="apply" value="">Apply for this Job</button>
-                        </div>
                     </div>
                 {{/eachJob}}
             </div>
@@ -74,8 +71,13 @@
                 <div id='jobtitle'> {{job.attributes.title}} </div>
                 <div id='location'> Location: {{job.attributes.location}} </div>
                 <div id='type'> Type: {{job.attributes.type}} </div>
-                <div class='job-description'>{{{job.attributes.description}}}</div> 
                 <div id='company'>Company: <a href='/#!/companies/{{job.attributes.company.data.id}}'>{{job.attributes.company.data.attributes.name}} </a></div>
+                {{#if user}}
+                    <div id="apply-job">
+                        <button id="apply-button">Apply for this Job</button>
+                    </div>
+                {{/if}}
+                <div class='job-description'>{{{job.attributes.description}}}</div> 
             </div>
         </script>
 
@@ -139,6 +141,28 @@
                     <input type="submit" id="loginbutton" value="Login">
                 </form> 
             {{/if}}
+        </script>
+
+        <script id="jobApp-template" type="text/x-handlebars-template">
+            <form id="jobApp-form">
+                <div>
+                    <label for="firstname" class="firstName-label">First Name</label>
+                    <input type="text" id="firstname" name="firstname" value="">
+                </div>
+                <div>
+                    <label for="lastname" class="firstName-label">Last Name</label>
+                    <input type="text" id="lastname" name="lastname" value="">
+                </div>
+                <div>
+                    <label for="email" class="email-label">Email Address</label>
+                    <input type="text" id="email" name="email" value="">
+                </div> 
+                <div>
+                    <label for="application" class="application-label">Application Details</label>
+                    <textarea id="text" name="text" cols="100" placeholder="Write down why you want this job..." required rows="20" value=""></textarea>
+                </div>
+                <input type="submit" id="submitApp" value="Submit Application">
+            </form> 
         </script>
     </body>
 </html>

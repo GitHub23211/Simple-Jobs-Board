@@ -24,6 +24,7 @@ const userAuth = {
                 }
                 else {
                     console.log("User logged in")
+                    console.log(data)
                     this.userData = data
                     window.dispatchEvent(new CustomEvent("modelUpdated"))
                 }
@@ -32,7 +33,12 @@ const userAuth = {
     },
 
     getJWT: function() {
-
+        if(this.userData) {
+            return this.userData.jwt
+        }
+        else {
+            return null
+        }
     },
 
     getUser: function() {

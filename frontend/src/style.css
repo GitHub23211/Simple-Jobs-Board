@@ -153,12 +153,6 @@ a:hover {
     font-weight: bold;
 }
 
-.job #apply-job {
-    grid-column: 1;
-    margin-top: 1em;
-    margin-left: 13em;
-}
-
 .job-detailed {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -168,7 +162,6 @@ a:hover {
 .job-detailed #jobtitle {
     grid-column: 1/6;
     margin-top: 1em;
-    margin-left: 1em;
     text-align: center;
     font-weight: bold;
     font-size: 120%;
@@ -177,23 +170,29 @@ a:hover {
 
 .job-detailed #company {
     grid-column: 1;
-    margin-top: 1em;
-    margin-left: 1em;
+    margin-top: 2em;
+    margin-left: 2em;
     font-weight: bold;
 }
 
 .job-detailed #location {
     grid-column: 1;
-    margin-top: 1em;
-    margin-left: 1em;
+    margin-top: 2em;
+    margin-left: 2em;
     font-weight: bold;
 }
 
 .job-detailed #type {
     grid-column: 1;
-    margin-top: 1em;
-    margin-left: 1em;
+    margin-top: 2em;
+    margin-left: 2em;
     font-weight: bold;
+}
+
+.job-detailed #apply-job {
+    grid-column: 1;
+    margin-top: 2em;
+    margin-left: 2em;
 }
 
 .job-description {
