@@ -36,7 +36,7 @@ window.addEventListener("modelUpdated", () => {
             return pathInfo.id == data.id
         }
 
-        View.jobView(jobs, jobs.findIndex(findEntry))
+        View.jobView(jobs, jobs.findIndex(findEntry), userAuth.getUser())
         bindJobAppButton()
     })
 

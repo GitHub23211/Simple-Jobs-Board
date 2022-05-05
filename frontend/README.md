@@ -73,3 +73,7 @@
 * Fixed accidentally rebinding the onsubmit of the job application submit input element to rebinding the onsubmit of the form element
 * Now checks everytime a detailed job application page is loaded if the user is logged
     * Used later to hide/show the jobApp element
+* Added an additional parameter to the jobView() function in view.js that takes a user
+    * Pass the getUser() function from userAuth.js as a parameter
+    * jobView() then passes the result of this function to the job-template to decide whether or not to dispaly the "Apply for this Job" button
+        * Show button if user is logged in, else do not

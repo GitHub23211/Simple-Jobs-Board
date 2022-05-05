@@ -72,9 +72,11 @@
                 <div id='location'> Location: {{job.attributes.location}} </div>
                 <div id='type'> Type: {{job.attributes.type}} </div>
                 <div id='company'>Company: <a href='/#!/companies/{{job.attributes.company.data.id}}'>{{job.attributes.company.data.attributes.name}} </a></div>
+                {{#if user}}
                     <div id="apply-job">
                         <button id="apply-button">Apply for this Job</button>
                     </div>
+                {{/if}}
                 <div class='job-description'>{{{job.attributes.description}}}</div> 
             </div>
         </script>
