@@ -38,9 +38,9 @@ const View = {
         selectedNav("Home")
     },
     
-    jobView: function(data, id, user) {
+    jobView: function(data, user) {
         let target = document.getElementById('main')
-        let job = data[id];
+        let job = data;
         let template = Handlebars.compile(document.getElementById("job-template").innerText)
         target.innerHTML = template({job: job, user:user})
     },

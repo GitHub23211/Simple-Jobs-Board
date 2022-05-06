@@ -32,12 +32,7 @@ window.addEventListener("modelUpdated", () => {
     })
 
     router.get('/jobs', (pathInfo) => {
-        const findEntry = (data) => {
-            return pathInfo.id == data.id
-        }
-
-        View.jobView(jobs, jobs.findIndex(findEntry), userAuth.getUser())
-        bindJobAppButton()
+        Model.fetchJobData(pathInfo.id)
     })
 
     router.get('/companies', (pathInfo) => {
@@ -56,6 +51,12 @@ window.addEventListener("modelUpdated", () => {
 
     router.route()
     bindings()
+})
+
+window.addEventListener("jobFetched", () => {
+    console.log(Model.foundJob)
+    View.jobView(Model.foundJob.data[0], userAuth.getUser())
+    bindJobAppButton()
 })
 
 const searchJobs = function() {

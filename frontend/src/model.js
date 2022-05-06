@@ -72,7 +72,7 @@ const Model = {
     },
 
     fetchJobData: function(id) {
-        fetch(`http://localhost:1337/api/jobs?filters[id][$eq]=${id}`)
+        fetch(`http://localhost:1337/api/jobs?populate=*&filters[id][$eq]=${id}`)
         .then(
             (response) => {
                 return response.json()
@@ -81,6 +81,7 @@ const Model = {
         .then(
             (data) => {
                 this.foundJob = data
+                window.dispatchEvent(new CustomEvent("jobFetched"))
             }
         )
     }

@@ -81,3 +81,7 @@
     * postApplication() takes this data and makes a POST request to the backend to create a new entry under the JobApplication collection.
 * Added another function in model.js called fetchJobData()
     * A job id is passed into the parameter, and fetches the job information from the backend that matches this id
+* Improved job fetching mechanism:
+    * The function bound to router.routes['/jobs'] is now fetchJobData()
+    * fetchJobData() dispatches a new event called "jobFetched" after fetching all its data.
+    * When the jobFectched event is dispatched, a listener function then rns the jobView() functin from view.js to display the job's detailed information.
