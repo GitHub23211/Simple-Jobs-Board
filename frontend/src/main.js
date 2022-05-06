@@ -80,7 +80,7 @@ const logout = function() {
 const applyJob = function() {
     View.jobAppView()
     window.dispatchEvent(new HashChangeEvent("hashUpdated"))
-    let jobAppSubmit = document.getElementById("jobApp-form")
+    let jobAppSubmit = document.getElementById("jobapp-form")
     if(jobAppSubmit) {
         jobAppSubmit.onsubmit = submitApplication
     }

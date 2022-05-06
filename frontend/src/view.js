@@ -66,7 +66,7 @@ const View = {
 
     jobAppView: function() {
         let target = document.getElementById('main')
-        let template = Handlebars.compile(document.getElementById("jobApp-template").innerText)
+        let template = Handlebars.compile(document.getElementById("jobapp-template").innerText)
         target.innerHTML = template()+target.innerHTML
     }
 }

@@ -12,9 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "text": {
-      "type": "text"
-    },
     "user": {
       "type": "relation",
       "relation": "manyToOne",
@@ -26,6 +23,9 @@
       "relation": "manyToOne",
       "target": "api::job.job",
       "inversedBy": "job_applications"
+    },
+    "text": {
+      "type": "richtext"
     }
   }
 }

@@ -85,3 +85,5 @@
     * The function bound to router.routes['/jobs'] is now fetchJobData()
     * fetchJobData() dispatches a new event called "jobFetched" after fetching all its data.
     * When the jobFectched event is dispatched, a listener function then rns the jobView() functin from view.js to display the job's detailed information.
+* Borrowed footer html code from assignment 1
+* Styled the job application textarea

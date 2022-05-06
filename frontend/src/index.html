@@ -2,7 +2,7 @@
     45203083
     Index.html
     .html file that serves as the basis for the website.
-    Credit to Steve Cassidy for the <header> code of the body.
+    Credit to Steve Cassidy for the <header> and <footer> code of the body.
     Borrowed and modified from the html code given from Assignment 1.
 -->
 
@@ -35,7 +35,7 @@
                                             
                 <div class="header-search">
                     <form id="search-form">  
-                        <label for="search" class="search-label"> Search Jobs </label>
+                        <label for="search" id="search-label"> Search Jobs </label>
                         <input type='text' id="search" placeholder="Enter keywords..." value="">
                         <input type='submit' id="searchbutton" value="Search">
                     </form>
@@ -48,6 +48,11 @@
 
         <div id='main'></div>
         </div>
+
+        <footer id="footer">
+            <p id="copyright">Copyright &copy; COMP2110 Web Designers, 2022.</p>
+            <p id="attribution">Bob's Jobs is a service of Bob Bobalooba Enterprises.</p>
+        </footer>
 
     <!-- Handlebars templates -->
         <script id="text-template" type="text/x-handlebars-template">
@@ -135,7 +140,7 @@
                 </div>
             {{else}}
                 <form id="login-form">
-                    <label for="login" class="login-label"> Sign In </label>
+                    <label for="username" id="login-label"> Sign In </label>
                     <input type="text" id="username" name="username" value="">
                     <input type="password" id="password" name="password" value="">
                     <input type="submit" id="loginbutton" value="Login">
@@ -143,14 +148,12 @@
             {{/if}}
         </script>
 
-        <script id="jobApp-template" type="text/x-handlebars-template">
-            <div>
-                <form id="jobApp-form">
-                    <label for="application" class="application-label">Application Details</label>
-                    <textarea id="text" name="text" cols="100" placeholder="Write down why you want this job..." rows="20" value=""></textarea>
-                    <input type="submit" id="submitApp-button" value="Submit Application">
-                </form> 
-            </div>
+        <script id="jobapp-template" type="text/x-handlebars-template">
+            <form id="jobapp-form">
+                <label for="text" id="jobapp-label">Application Details</label>
+                <textarea id="text" name="text" cols="100" placeholder="Write down why you want this job..." rows="20" value=""></textarea>
+                <input type="submit" id="submitapp-button" value="Submit Application">
+            </form> 
         </script>
     </body>
 </html>

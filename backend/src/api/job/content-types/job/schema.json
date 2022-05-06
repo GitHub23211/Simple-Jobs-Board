@@ -15,9 +15,6 @@
     "title": {
       "type": "string"
     },
-    "description": {
-      "type": "text"
-    },
     "location": {
       "type": "string"
     },
@@ -35,6 +32,9 @@
       "relation": "oneToMany",
       "target": "api::job-application.job-application",
       "mappedBy": "job"
+    },
+    "description": {
+      "type": "richtext"
     }
   }
 }
