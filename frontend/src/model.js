@@ -50,7 +50,6 @@ const Model = {
     },
 
     postApplication: function(appInfo, JWT) {
-        console.log(`form data is ${JSON.stringify(appInfo)}`)
         fetch('http://localhost:1337/api/job-applications', {
             method: 'POST',
             headers: {

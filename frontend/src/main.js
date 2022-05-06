@@ -54,8 +54,7 @@ window.addEventListener("modelUpdated", () => {
 })
 
 window.addEventListener("jobFetched", () => {
-    console.log(Model.foundJob)
-    View.jobView(Model.foundJob.data[0], userAuth.getUser())
+    View.jobView(Model.foundJob.data[0], userAuth.userExist())
     bindJobAppButton()
 })
 
@@ -91,8 +90,11 @@ const submitApplication = function() {
     event.preventDefault()
     console.log(this.elements)
     const jobAppData = {
-        'text': this.elements['text'].value 
+        'text': this.elements['text'].value,
+        'job': Model.foundJob.data[0],
+        'user': userAuth.userData
     }
+    console.log(userAuth.getJWT())
     Model.postApplication(jobAppData, userAuth.getJWT())
 
 }
@@ -101,19 +103,19 @@ const bindings = function() {
     let searchForm = document.getElementById("search-form")
     searchForm.onsubmit = searchJobs
 
-    if(!userAuth.getUser()) {
+    if(!userAuth.userExist()) {
         let loginForm = document.getElementById("login-form")
         loginForm.onsubmit = auth
     }
 
-    if(userAuth.getUser()) {
+    if(userAuth.userExist()) {
         let logoutButton = document.getElementById("logoutbutton")
         logoutButton.onclick = logout
     }
 }
 
 const bindJobAppButton = function() {
-    if(userAuth.getUser()) {
+    if(userAuth.userExist()) {
         let applyFormButton = document.getElementById("apply-button")
         if(applyFormButton) {
             applyFormButton.onclick = applyJob
