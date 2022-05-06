@@ -77,3 +77,7 @@
     * Pass the getUser() function from userAuth.js as a parameter
     * jobView() then passes the result of this function to the job-template to decide whether or not to dispaly the "Apply for this Job" button
         * Show button if user is logged in, else do not
+* Changed submitApplication in main.js so that it takes the text from the textarea input, wraps it in JSON and passes it to a new function in model.js called postApplication()
+    * postApplication() takes this data and makes a POST request to the backend to create a new entry under the JobApplication collection.
+* Added another function in model.js called fetchJobData()
+    * A job id is passed into the parameter, and fetches the job information from the backend that matches this id

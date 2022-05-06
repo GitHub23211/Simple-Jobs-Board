@@ -88,8 +88,12 @@ const applyJob = function() {
 
 const submitApplication = function() {
     event.preventDefault()
-    console.log("Clicked submit")
-    console.log(this.elements[0].value)
+    console.log(this.elements)
+    const jobAppData = {
+        'text': this.elements['text'].value 
+    }
+    Model.postApplication(jobAppData, userAuth.getJWT())
+
 }
 
 const bindings = function() {

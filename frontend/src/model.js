@@ -12,6 +12,8 @@ const Model = {
         companies: []
     },
 
+    foundJob: {},
+
     fetchData: function() {
         Promise.all(
             [
@@ -45,5 +47,41 @@ const Model = {
             }
         }
         return foundData
+    },
+
+    postApplication: function(appInfo, JWT) {
+        console.log(`form data is ${JSON.stringify(appInfo)}`)
+        fetch('http://localhost:1337/api/job-applications', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `bearer ${JWT}`
+            },
+            body: JSON.stringify({data:appInfo})
+        })
+        .then(
+            (response) => {
+                return response.json()
+            }
+        )
+        .then(
+            (data) => {
+                console.log(data)
+            }
+        )
+    },
+
+    fetchJobData: function(id) {
+        fetch(`http://localhost:1337/api/jobs?filters[id][$eq]=${id}`)
+        .then(
+            (response) => {
+                return response.json()
+            }
+        )
+        .then(
+            (data) => {
+                this.foundJob = data
+            }
+        )
     }
 }
