@@ -47,6 +47,10 @@ window.addEventListener("modelUpdated", () => {
         View.searchView(Model.searchEntries(pathInfo.id), pathInfo.id)
     })
 
+    router.get('/me', () => {
+        Model.fetchAppliedJobs(userAuth.userData.username)
+    })
+
     View.loginView(userAuth.userData)
 
     router.route()
@@ -62,7 +66,11 @@ window.addEventListener("jobFetched", () => {
 window.addEventListener("invalidLogin", () => {
     View.invalidLoginView()
     bindings()
-    
+})
+
+window.addEventListener("appliedJobsFetched", () => {
+    View.appliedJobsView(Model.appliedJobs)
+    console.log(Model.appliedJobs)
 })
 
 
@@ -83,14 +91,13 @@ const submitApplication = function() {
         'job': Model.foundJob.data[0],
         'user': userAuth.userData
     }
-    console.log(userAuth.getJWT())
     Model.postApplication(jobAppData, userAuth.getJWT())
-
+    Model.changeHash("!/me", "")
 }
 
 const searchJobs = function() {
     event.preventDefault()
-    Model.changeHash(this.elements[0].value)
+    Model.changeHash("!/search/", this.elements[0].value)
 }
 
 const auth = function () {

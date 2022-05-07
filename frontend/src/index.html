@@ -162,4 +162,19 @@
             Invalid Username or Password
         </div>
     </script>
+
+    <script id="applied-jobs-template" type="text/x-handlebars-template">
+        <div id="applied-jobs">
+            Jobs you've applied for
+            <div class='joblist'>
+                {{#each job}}
+                    <div class='job'>
+                        <div id='title'><a href='/#!/jobs/{{id}}' class="job-title" data-id="{{id}}"> {{attributes.job.data.attributes.title}} </a></div>
+                        <div id='location'> Location: {{attributes.job.data.attributes.location}} </div>
+                        <div id='type'> Type: {{attributes.job.data.attributes.type}} </div>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </script>
 </html>

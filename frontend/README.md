@@ -50,6 +50,8 @@
     * Will create a new function that will show all relevant jobs soon.
 * Created a searchView function that displays all jobs returned by searchEntries in model.js using a Handlebars template called "search-template" in index.html
     * "search-template" checks if the array is empty and either displays a view of all relevant jobs or a generic error page that informs the user that their search term did not find any jobs
+
+# Level 4
 * Remove html code in header-auth and created a new "login-template" that shows a login form if a user is logged out, or a message saying "Welcome [user]" if they are logged in.
     * Login form's onsubmit has been rebounded via the bindings() function in main.js
         * It now calls a function called auth() in main.js instead that turns the values gotten from the username and password textboxes into a JSON object and passes it to a function in userauth.js called login()
@@ -88,3 +90,9 @@
 * Borrowed footer html code from assignment 1
 * Styled the job application textarea
 * Added a message that pops up when an invalid username and/or password is used to login
+* Created an object called "appliedJobs" in model.js that stores all the jobs that the logged in user has applied.
+    * These jobs are fetched using the fetchAppliedJobs() function in model.js that makes an api call to Strapi using filters to get the data precisely.
+* Created a function in view.js called appliedJobsView() that takes in an object containing all of the jobs the user has applied for and displays them on screen using the "applied-jobs-template" in index.html
+* Added a new hash URL path in main.js for the "/me" URL.
+    * Set the function of this URL to call fetchAppliedJobs()
+        * fetchAppliedJobs() then dispatches a "appliedJobsFetched" event that then calls the appliedJobsView()

@@ -14,6 +14,8 @@ const Model = {
 
     foundJob: {},
 
+    appliedJobs: {},
+
     fetchData: function() {
         Promise.all(
             [
@@ -32,8 +34,8 @@ const Model = {
         )
     },
 
-    changeHash: function(searchTerm) {
-        window.location.hash = "!/search/" + searchTerm
+    changeHash: function(path, id) {
+        window.location.hash = path + id
         window.dispatchEvent(this.event)
     },
 
@@ -58,16 +60,6 @@ const Model = {
             },
             body: JSON.stringify({data:appInfo})
         })
-        .then(
-            (response) => {
-                return response.json()
-            }
-        )
-        .then(
-            (data) => {
-                console.log(data)
-            }
-        )
     },
 
     fetchJobData: function(id) {
@@ -81,6 +73,21 @@ const Model = {
             (data) => {
                 this.foundJob = data
                 window.dispatchEvent(new CustomEvent("jobFetched"))
+            }
+        )
+    },
+
+    fetchAppliedJobs: function(user) {
+        fetch(`http://localhost:1337/api/job-applications?populate=*&filters[user][username][$eq]=${user}`)
+        .then(
+            (response) => {
+                return response.json()
+            }
+        )
+        .then(
+            (data) => {
+                this.appliedJobs = data.data
+                window.dispatchEvent(new CustomEvent("appliedJobsFetched"))
             }
         )
     }

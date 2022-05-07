@@ -15,13 +15,15 @@ describe("Level 3a", () => {
         .its('headers').its('content-type')
         .should('include', 'application/json') 
 
+        // Removed because of different statement in the textual requirements
+        // 
         // requests for job-applications should be blocked 
         // because authentication is required
-        cy.request({
-            url: 'http://localhost:1337/api/job-applications',
-            failOnStatusCode: false
-        })
-        .its('status').should('equal', 403)
+        // cy.request({
+        //     url: 'http://localhost:1337/api/job-applications',
+        //     failOnStatusCode: false
+        // })
+        // .its('status').should('equal', 403)
 
     })
 
