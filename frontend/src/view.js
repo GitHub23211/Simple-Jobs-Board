@@ -64,10 +64,16 @@ const View = {
         target.innerHTML = template({user:user})
     },
 
+    invalidLoginView: function() {
+        let target = document.getElementById('header-auth')
+        let template = Handlebars.compile(document.getElementById("invalid-login-template").innerText)
+        target.innerHTML = template() + target.innerHTML
+    },
+
     jobAppView: function() {
         let target = document.getElementById('main')
         let template = Handlebars.compile(document.getElementById("jobapp-template").innerText)
-        target.innerHTML = template()+target.innerHTML
+        target.innerHTML = template() + target.innerHTML
     }
 }
 

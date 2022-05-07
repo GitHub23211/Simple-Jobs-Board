@@ -151,9 +151,15 @@
         <script id="jobapp-template" type="text/x-handlebars-template">
             <form id="jobapp-form">
                 <label for="text" id="jobapp-label">Application Details</label>
-                <textarea id="text" name="text" cols="100" placeholder="Write down why you want this job..." rows="20" value=""></textarea>
+                <textarea id="text" name="text" required cols="100" placeholder="Write down why you want this job..." rows="20" value=""></textarea>
                 <input type="submit" id="submitapp-button" value="Submit Application">
             </form> 
         </script>
     </body>
+
+    <script id="invalid-login-template" type="text/x-handlebars-template">
+        <div id="invalid-login">
+            Invalid Username or Password
+        </div>
+    </script>
 </html>

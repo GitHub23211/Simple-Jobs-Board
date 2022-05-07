@@ -93,9 +93,21 @@ a:hover {
 
 #header-auth {
     grid-area: auth;
+    display: grid;
     text-align: right;
     background-color: #0D3880;
-    padding-right: 13vw;
+}
+
+#invalid-login {
+    grid-column: 3;
+    grid-row: 1;
+    padding-right: 17vw;
+}
+
+#login-form {
+    grid-column: 3;
+    grid-row: 2;
+    padding-right: 10vw;
 }
 
 .joblist {

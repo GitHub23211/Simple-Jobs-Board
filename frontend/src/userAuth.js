@@ -3,6 +3,7 @@ export {userAuth}
 const userAuth = {
     userData: null,
     userjwt: null,
+    attemptInvalid: false,
 
     login: function(authInfo) {
         fetch('http://localhost:1337/api/auth/local', {
@@ -21,12 +22,16 @@ const userAuth = {
         .then(
             (data) => {
                 if(data.error) {
-                    window.alert("Invalid username or password")
+                    if(!this.attemptInvalid) {
+                        window.dispatchEvent(new CustomEvent("invalidLogin"))
+                        this.attemptInvalid = true
+                    }
                 }
                 else {
                     this.userData = data.user
                     this.userjwt = data.jwt
                     window.dispatchEvent(new CustomEvent("modelUpdated"))
+                    this.attemptInvalid = false
                 }
             }
         )
@@ -45,7 +50,7 @@ const userAuth = {
         }
     },
 
-    userExist: function() {
+    userExists: function() {
         if(this.userData) {
             return true
         }

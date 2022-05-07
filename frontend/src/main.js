@@ -54,9 +54,39 @@ window.addEventListener("modelUpdated", () => {
 })
 
 window.addEventListener("jobFetched", () => {
-    View.jobView(Model.foundJob.data[0], userAuth.userExist())
+    View.jobView(Model.foundJob.data[0], userAuth.userExists())
+    if(userAuth.userExists())
     bindJobAppButton()
 })
+
+window.addEventListener("invalidLogin", () => {
+    View.invalidLoginView()
+    bindings()
+    
+})
+
+
+
+const applyJob = function() {
+    View.jobAppView()
+    let jobAppSubmit = document.getElementById("jobapp-form")
+    if(jobAppSubmit) {
+        jobAppSubmit.onsubmit = submitApplication
+    }
+}
+
+const submitApplication = function() {
+    event.preventDefault()
+    console.log(this.elements)
+    const jobAppData = {
+        'text': this.elements['text'].value,
+        'job': Model.foundJob.data[0],
+        'user': userAuth.userData
+    }
+    console.log(userAuth.getJWT())
+    Model.postApplication(jobAppData, userAuth.getJWT())
+
+}
 
 const searchJobs = function() {
     event.preventDefault()
@@ -77,49 +107,25 @@ const logout = function() {
     window.dispatchEvent(new CustomEvent("modelUpdated"))
 }
 
-const applyJob = function() {
-    View.jobAppView()
-    window.dispatchEvent(new HashChangeEvent("hashUpdated"))
-    let jobAppSubmit = document.getElementById("jobapp-form")
-    if(jobAppSubmit) {
-        jobAppSubmit.onsubmit = submitApplication
-    }
-}
-
-const submitApplication = function() {
-    event.preventDefault()
-    console.log(this.elements)
-    const jobAppData = {
-        'text': this.elements['text'].value,
-        'job': Model.foundJob.data[0],
-        'user': userAuth.userData
-    }
-    console.log(userAuth.getJWT())
-    Model.postApplication(jobAppData, userAuth.getJWT())
-
-}
-
 const bindings = function() {
     let searchForm = document.getElementById("search-form")
     searchForm.onsubmit = searchJobs
 
-    if(!userAuth.userExist()) {
+    if(!userAuth.userExists()) {
         let loginForm = document.getElementById("login-form")
         loginForm.onsubmit = auth
     }
 
-    if(userAuth.userExist()) {
+    if(userAuth.userExists()) {
         let logoutButton = document.getElementById("logoutbutton")
         logoutButton.onclick = logout
     }
 }
 
 const bindJobAppButton = function() {
-    if(userAuth.userExist()) {
-        let applyFormButton = document.getElementById("apply-button")
-        if(applyFormButton) {
-            applyFormButton.onclick = applyJob
-        }
+    let applyFormButton = document.getElementById("apply-button")
+    if(applyFormButton) {
+        applyFormButton.onclick = applyJob
     }
 }
 
