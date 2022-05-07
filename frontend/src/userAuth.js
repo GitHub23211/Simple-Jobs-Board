@@ -1,3 +1,10 @@
+/*  Joshua Santos
+    45203083
+    userAuth.js
+    Object that deals with storing user information
+    and validating logins
+*/
+
 export {userAuth}
 
 const userAuth = {
@@ -35,10 +42,6 @@ const userAuth = {
                 }
             }
         )
-    },
-
-    submitApp: function() {
-
     },
 
     getJWT: function() {

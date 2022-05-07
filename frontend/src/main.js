@@ -1,6 +1,6 @@
 /*  Joshua Santos
     45203083
-    Main.js
+    main.js
     Controller module of the website
 */
 
@@ -11,16 +11,14 @@ import {Model} from './model.js'
 
 const router = new Router(View.errorView)
 
+//Populates the routes object in route.js
 window.addEventListener("modelUpdated", () => {
-    let jobs = Model.data.jobs
-    let companies = Model.data.companies
-
     router.get('/', () => {
-        View.homeView(jobs)
+        View.homeView(Model.jobs)
     })
 
     router.get('/#', () => {
-        View.homeView(jobs)
+        View.homeView(Model.jobs)
     })
     
     router.get('/about', () => {
@@ -32,48 +30,81 @@ window.addEventListener("modelUpdated", () => {
     })
 
     router.get('/jobs', (pathInfo) => {
-        Model.fetchJobData(pathInfo.id)
+        Model.fetchIndividual('jobs', pathInfo.id, 'jobFetched')
     })
 
     router.get('/companies', (pathInfo) => {
-        const findEntry = (data) => {
-            return pathInfo.id == data.id
-        }
-
-        View.companyView(companies, companies.findIndex(findEntry))
+        Model.fetchIndividual('companies', pathInfo.id, 'companyFetched')
     })
 
     router.get('/search', (pathInfo) => {
-        View.searchView(Model.searchEntries(pathInfo.id), pathInfo.id)
+        Model.searchEntries(pathInfo.id)
     })
 
     router.get('/me', () => {
         Model.fetchAppliedJobs(userAuth.userData.username)
     })
 
+    //Login form/Logged should be dispalyed constantly so it is not tied to a specific URL
     View.loginView(userAuth.userData)
 
     router.route()
-    bindings()
+    allBindings()
+})
+
+window.addEventListener("searchedJobs", () => {
+    View.searchView(Model.searchResults.results, Model.searchResults.searchTerm)
 })
 
 window.addEventListener("jobFetched", () => {
-    View.jobView(Model.foundJob.data[0], userAuth.userExists())
-    if(userAuth.userExists())
-    bindJobAppButton()
+    View.jobView(Model.foundData.data[0], userAuth.userExists())
+    if(userAuth.userExists()) {
+        bindJobAppButton()
+    }
+})
+
+window.addEventListener("companyFetched", () => {
+    View.companyView(Model.foundData.data[0])
 })
 
 window.addEventListener("invalidLogin", () => {
     View.invalidLoginView()
-    bindings()
+    allBindings()
 })
 
 window.addEventListener("appliedJobsFetched", () => {
     View.appliedJobsView(Model.appliedJobs)
-    console.log(Model.appliedJobs)
 })
 
 
+const allBindings = function() {
+    bindSearch()
+    bindLogin()
+}
+
+const bindSearch = function() {
+    let searchForm = document.getElementById("search-form")
+    searchForm.onsubmit = searchJobs
+}
+
+const bindLogin = function() {
+    if(!userAuth.userExists()) {
+        let loginForm = document.getElementById("login-form")
+        loginForm.onsubmit = auth
+    }
+
+    if(userAuth.userExists()) {
+        let logoutButton = document.getElementById("logoutbutton")
+        logoutButton.onclick = logout
+    }
+}
+
+const  bindJobAppButton =  function() {
+    let applyFormButton = document.getElementById("apply-button")
+    if(applyFormButton) {
+        applyFormButton.onclick = applyJob
+    }
+}
 
 const applyJob = function() {
     View.jobAppView()
@@ -85,10 +116,9 @@ const applyJob = function() {
 
 const submitApplication = function() {
     event.preventDefault()
-    console.log(this.elements)
     const jobAppData = {
         'text': this.elements['text'].value,
-        'job': Model.foundJob.data[0],
+        'job': Model.foundData.data[0],
         'user': userAuth.userData
     }
     Model.postApplication(jobAppData, userAuth.getJWT())
@@ -100,7 +130,7 @@ const searchJobs = function() {
     Model.changeHash("!/search/", this.elements[0].value)
 }
 
-const auth = function () {
+const auth =  function () {
     event.preventDefault()
     const authInfo = {
        identifier: this.elements['username'].value,
@@ -114,27 +144,6 @@ const logout = function() {
     window.dispatchEvent(new CustomEvent("modelUpdated"))
 }
 
-const bindings = function() {
-    let searchForm = document.getElementById("search-form")
-    searchForm.onsubmit = searchJobs
-
-    if(!userAuth.userExists()) {
-        let loginForm = document.getElementById("login-form")
-        loginForm.onsubmit = auth
-    }
-
-    if(userAuth.userExists()) {
-        let logoutButton = document.getElementById("logoutbutton")
-        logoutButton.onclick = logout
-    }
-}
-
-const bindJobAppButton = function() {
-    let applyFormButton = document.getElementById("apply-button")
-    if(applyFormButton) {
-        applyFormButton.onclick = applyJob
-    }
-}
 
 window.onload = () => {
     Model.fetchData()

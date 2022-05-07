@@ -96,3 +96,6 @@
 * Added a new hash URL path in main.js for the "/me" URL.
     * Set the function of this URL to call fetchAppliedJobs()
         * fetchAppliedJobs() then dispatches a "appliedJobsFetched" event that then calls the appliedJobsView()
+
+* Refactored and cleaned up unneeded code.
+* Backend now fully relies on the Strapi API to sort and filter data rather than using sort() methods or manually finding data by going through an array

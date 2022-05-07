@@ -31,7 +31,7 @@ const View = {
         "Applicant Help")
     },
 
-    homeView: function(data, limit) {
+    homeView: function(data) {
         let target = document.getElementById('main')
         let template = Handlebars.compile(document.getElementById("home-template").innerText)
         target.innerHTML = template({job:data})
@@ -45,11 +45,11 @@ const View = {
         target.innerHTML = template({job: job, user:user})
     },
 
-    companyView: function(data, id) {
+    companyView: function(data) {
         let target = document.getElementById('main')
         let template = Handlebars.compile(document.getElementById("company-template").innerText)
-        let compJobList = data[id].attributes.jobs.data
-        target.innerHTML = template({data: data[id], job:compJobList})
+        let compJobList = data.attributes.jobs.data
+        target.innerHTML = template({data: data, job:compJobList})
     },
 
     searchView: function(data, searchTerm) {
@@ -108,19 +108,6 @@ const selectedNav = function(id) {
 //from most recent according to its publishedAt attribute
 Handlebars.registerHelper('eachJob', function(data, options) {
     let template = ""
-    data.sort(
-        (a, b) => {
-            let date1 = Date.parse(a.attributes.publishedAt)
-            let date2 = Date.parse(b.attributes.publishedAt)
-            if(date1 > date2) {
-                return -1
-            }
-            if(date1 < date2) {
-                return 1
-            }
-            return 0
-        }
-    )
     for(let i = 0; i < 10; i++) {
         template = template + options.fn(data[i])
     }

@@ -1,56 +1,71 @@
+/*  Joshua Santos
+    45203083
+    model.js
+    Object that deals with getting and posting data to the Strapi database
+    as well as dispatching events to let the controller know if it needs
+    to change the information displayed on screen
+*/
+
 export {Model}
 
 const Model = {
 
-    jobsResource: `http://localhost:1337/api/jobs?populate=*`,
-    compResource: `http://localhost:1337/api/companies?populate=*`,
+    jobsResource: `http://localhost:1337/api/jobs?populate=*&sort[0]=publishedAt:desc`,
 
     event: new CustomEvent("modelUpdated"),
 
-    data: {
-        jobs: [],
-        companies: []
+    jobs: [],
+
+    searchResults: {
+        results: [],
+        searchTerm: ""
     },
 
-    foundJob: {},
+    foundData: {},
 
     appliedJobs: {},
 
     fetchData: function() {
-        Promise.all(
-            [
-                fetch(this.jobsResource)
-                .then((response) => response.json()),
-                fetch(this.compResource)
-                .then((response) => response.json()),
-            ]
+        fetch(this.jobsResource)
+        .then(
+            (response) => {
+                return response.json()
+            }
         )
         .then(
-            (responses) => {
-                this.data.jobs = responses[0].data
-                this.data.companies = responses[1].data
+            (data) => {
+                this.jobs = data.data
                 window.dispatchEvent(this.event)
             }
         )
     },
 
+    //Manually changes the hash URL
     changeHash: function(path, id) {
         window.location.hash = path + id
         window.dispatchEvent(this.event)
     },
 
+    //Searches Strapi database for jobs containing searchTerm in their description (case-insensitive)
+    //and returns the results and searchTerm to a searchResults object.
+    //Dispatches a searchedJobs event after.
     searchEntries: function(searchTerm) {
-        let foundData = []
-        let index = 0;
-        for(let i = 0; i < this.data.jobs.length; i++) {
-            if(this.data.jobs[i].attributes.description.includes(searchTerm)) {
-                foundData[index] = this.data.jobs[i]
-                index++
+        fetch(`http://localhost:1337/api/jobs?filters[description][$containsi]=${searchTerm}`)
+        .then(
+            (response) => {
+                return response.json()
             }
-        }
-        return foundData
+        )
+        .then(
+            (data) => {
+                this.searchResults.results = data.data
+                this.searchResults.searchTerm = searchTerm
+                window.dispatchEvent(new CustomEvent("searchedJobs"))
+            }
+        )
     },
 
+    //Posts the users job application to the Strapi database
     postApplication: function(appInfo, JWT) {
         fetch('http://localhost:1337/api/job-applications', {
             method: 'POST',
@@ -62,8 +77,11 @@ const Model = {
         })
     },
 
-    fetchJobData: function(id) {
-        fetch(`http://localhost:1337/api/jobs?populate=*&filters[id][$eq]=${id}`)
+    //Fetches the detailed view of a job/company that matches the given id from the Strapi database
+    //data parameter is used to identify whether we are accessing the "jobs" and "companies" collection
+    //event parameter is used to decide the event wer are dispatching to the controller
+    fetchIndividual: function(data, id, event) {
+        fetch(`http://localhost:1337/api/${data}?populate=*&filters[id][$eq]=${id}`)
         .then(
             (response) => {
                 return response.json()
@@ -71,12 +89,13 @@ const Model = {
         )
         .then(
             (data) => {
-                this.foundJob = data
-                window.dispatchEvent(new CustomEvent("jobFetched"))
+                this.foundData = data
+                window.dispatchEvent(new CustomEvent(event))
             }
         )
     },
 
+    //Fetches all job applications that contain the user's name in the user data field
     fetchAppliedJobs: function(user) {
         fetch(`http://localhost:1337/api/job-applications?populate=*&filters[user][username][$eq]=${user}`)
         .then(
