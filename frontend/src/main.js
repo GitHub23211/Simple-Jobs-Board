@@ -14,11 +14,11 @@ const router = new Router(View.errorView)
 //Populates the routes object in route.js
 window.addEventListener("modelUpdated", () => {
     router.get('/', () => {
-        View.homeView(Model.jobs)
+        View.homeView(Model.firstTenJobs)
     })
 
     router.get('/#', () => {
-        View.homeView(Model.jobs)
+        View.homeView(Model.firstTenJobs)
     })
     
     router.get('/about', () => {

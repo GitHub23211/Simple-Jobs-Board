@@ -14,7 +14,7 @@ const Model = {
 
     event: new CustomEvent("modelUpdated"),
 
-    jobs: [],
+    firstTenJobs: [],
 
     searchResults: {
         results: [],
@@ -34,7 +34,7 @@ const Model = {
         )
         .then(
             (data) => {
-                this.jobs = data.data
+                this.firstTenJobs = data.data
                 window.dispatchEvent(this.event)
             }
         )
