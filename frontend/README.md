@@ -104,3 +104,6 @@
 * Styled the search bar and modified the layout of the navigation bar
 * changed selectedNav() in view.js to work with the modified layout of the nav bar.
 * Working on bettering the layout of the logo and login area
+* Removed the need for the eachJob Handlebar helper function
+    * Used the "pagination" API call to strapi to only return the first 10 entries
+* Fixed the structure of the nav bar so it passes cypress tests.

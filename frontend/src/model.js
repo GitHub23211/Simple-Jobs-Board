@@ -10,7 +10,7 @@ export {Model}
 
 const Model = {
 
-    jobsResource: `http://localhost:1337/api/jobs?populate=*&sort[0]=publishedAt:desc`,
+    jobsResource: `http://localhost:1337/api/jobs?populate=*&sort[0]=publishedAt:desc&pagination[pageSize]=10`,
 
     event: new CustomEvent("modelUpdated"),
 

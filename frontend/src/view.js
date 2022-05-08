@@ -89,7 +89,7 @@ const View = {
 //Finds the navigation menu link via its innerText then adds the "selected" class to that element's classList
 //It then removes the "selected" class from all the other HTML elements.
 const selectedNav = function(id) {
-    let nav = document.getElementsByClassName('main-nav')
+    let nav = document.getElementsByClassName('main-menu')
     for(let i = 0; i < nav[0].children.length; i++) {
         if(nav[0].children[i].innerText === id) {
             nav[0].children[i].classList.add('selected')
@@ -99,14 +99,3 @@ const selectedNav = function(id) {
         }
     }
 }
-
-//Custom Handlebars helper function called "eachJob"
-//Applies the "home-template" and displays the first 10 jobs
-//stored in the jobs array in model.js.
-Handlebars.registerHelper('eachJob', function(data, options) {
-    let template = ""
-    for(let i = 0; i < 10; i++) {
-        template = template + options.fn(data[i])
-    }
-    return template;
-})

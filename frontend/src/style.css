@@ -49,29 +49,47 @@ a:hover {
 
 .main-nav {
     grid-area: menu;
+}
+
+.main-menu {
     display: grid;
     text-align: center;
 }
 
-.main-nav a {
-    padding: 1em;
+.main-menu div {
     border-radius: 10px;
+    align-items: center;
+    display: flex;
 }
 
-.main-nav #home-link {
+.main-menu #home-link {
     grid-column: 1;
-
 }
 
-.main-nav #help-link {
+.main-menu #home-link a{
+    width: 100%;
+    padding: 1em;
+}
+
+.main-menu #help-link {
     grid-column: 2;
 }
 
-.main-nav #about-link {
+.main-menu #help-link a {
+    width: 100%;
+    padding: 1em;
+}
+
+.main-menu #about-link {
     grid-column: 3;
 }
 
-.main-nav a:hover {
+.main-menu #about-link a{
+    width: 100%;
+    padding: 1em;
+}
+
+.main-menu div:hover {
     background-color: #0942a5;
 }
 
@@ -93,7 +111,7 @@ a:hover {
     text-align: left;
 }
 
-#search-button {
+#searchbutton {
     border-radius: 6px;
     padding: 1em 2em 1em 1em;
     background-color: #183afa;
