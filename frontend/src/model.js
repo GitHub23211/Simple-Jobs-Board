@@ -47,7 +47,7 @@ const Model = {
     },
 
     //Searches Strapi database for jobs containing searchTerm in their description (case-insensitive)
-    //and returns the results and searchTerm to a searchResults object.
+    //and stores the results and searchTerm in a searchResults object.
     //Dispatches a searchedJobs event after.
     searchEntries: function(searchTerm) {
         fetch(`http://localhost:1337/api/jobs?filters[description][$containsi]=${searchTerm}`)
@@ -77,9 +77,9 @@ const Model = {
         })
     },
 
-    //Fetches the detailed view of a job/company that matches the given id from the Strapi database
-    //data parameter is used to identify whether we are accessing the "jobs" and "companies" collection
-    //event parameter is used to decide the event wer are dispatching to the controller
+    //Fetches a detailed view of a job/company that matches the given id from the Strapi database
+    //data parameter is used to identify whether we are accessing the "jobs" or "companies" collection
+    //event parameter is used to decide what event it will dispatch to the controller
     fetchIndividual: function(data, id, event) {
         fetch(`http://localhost:1337/api/${data}?populate=*&filters[id][$eq]=${id}`)
         .then(

@@ -25,19 +25,16 @@
             <a href="/#" class="logo">Bob's Jobs</a>
             <div class="page-header-main ">
                 <nav class="main-nav">
-                    <ul class="main-menu">
-                        <li><a href="/#">Home</a></li>
-                        <li><a href="/#!/job">Jobs</a></li>
-                        <li><a href="/#!/help">Applicant Help</a></li>
-                        <li><a href="/#!/about">About Us</a></li>
-                    </ul>
+                    <a id="home-link" href="/#">Home</a>
+                    <a id="help-link" href="/#!/help">Applicant Help</a>
+                    <a id="about-link" href="/#!/about">About Us</a>
                 </nav>
                                             
                 <div class="header-search">
                     <form id="search-form">  
                         <label for="search" id="search-label"> Search Jobs </label>
                         <input type='text' id="search" placeholder="Enter keywords..." value="">
-                        <input type='submit' id="searchbutton" value="Search">
+                        <input type='submit' id="search-button" value="Search">
                     </form>
                 </div>
     
@@ -55,6 +52,18 @@
         </footer>
 
     <!-- Handlebars templates -->
+
+        <script id="error-page-template" type="text/x-handlebars-template">
+            <div class="error-page">
+                <h1>Sorry, we couldn't find the page you were looking for. This is because:</h1>
+                <ul>
+                    <li>There is an error in your URL. Please double check the URL and try again</li>
+                    <li>The page has been moved or deleted</li>
+                </ul>
+                <b>Try returning to the home page, or search for other content using the search bar.</b>
+            </div>
+        </script>
+
         <script id="text-template" type="text/x-handlebars-template">
             <p>{{text}}</p>
         </script>

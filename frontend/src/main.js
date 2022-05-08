@@ -53,7 +53,11 @@ window.addEventListener("modelUpdated", () => {
 })
 
 window.addEventListener("searchedJobs", () => {
-    View.searchView(Model.searchResults.results, Model.searchResults.searchTerm)
+    let searchTerm = ""
+    if(Model.searchResults.searchTerm) {
+        searchTerm = decodeURI(Model.searchResults.searchTerm)
+    }
+    View.searchView(Model.searchResults.results, searchTerm)
 })
 
 window.addEventListener("jobFetched", () => {

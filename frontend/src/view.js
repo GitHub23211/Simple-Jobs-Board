@@ -9,8 +9,8 @@ export {View}
 const View = {
     errorView: function() {
         let target = document.getElementById('main')
-        let template = '<h1> Page not found </h1>'
-        target.innerHTML = template
+        let template = Handlebars.compile(document.getElementById("error-page-template").innerText)
+        target.innerHTML = template()
     },
     
     applyTemplate: function(id, string, nav) {
@@ -101,11 +101,8 @@ const selectedNav = function(id) {
 }
 
 //Custom Handlebars helper function called "eachJob"
-//Takes a job array from the object in sample-data.json and inserts its details
-//into the "job-template" Handlebar template
-//for up to 10 job arrays
-//Also sorts the job array before inserting each job into the template 
-//from most recent according to its publishedAt attribute
+//Applies the "home-template" and displays the first 10 jobs
+//stored in the jobs array in model.js.
 Handlebars.registerHelper('eachJob', function(data, options) {
     let template = ""
     for(let i = 0; i < 10; i++) {

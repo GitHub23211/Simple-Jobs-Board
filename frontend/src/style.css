@@ -47,23 +47,30 @@ a:hover {
 
 .main-nav {
     grid-area: menu;
-}
-
-.main-menu {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    list-style-type: none;
-}
-
-.main-menu li {
-    border-radius: 10px;
-    display: inline-flexbox;
-    width: 99%;
     text-align: center;
 }
 
-.main-menu li:hover {
-    background-color: #032156;
+.main-nav a {
+    padding: 1em;
+    border-radius: 10px;
+}
+
+.main-nav #home-link {
+    grid-column: 1;
+
+}
+
+.main-nav #help-link {
+    grid-column: 2;
+}
+
+.main-nav #about-link {
+    grid-column: 3;
+}
+
+.main-nav a:hover {
+    background-color: #0942a5;
 }
 
 .header-search {
@@ -73,22 +80,24 @@ a:hover {
     padding: 15px 0px 15px;
 }
 
-.visually-hidden {
-    margin-right: 1vw;
-    font-size: 20px;
+#search-label {
+    font-size: 120%;
+    font-weight: 500;
+    margin-right: 1em;
 }
 
-.search-input-field {
+#search {
     padding: 2vh 20vw 2vh 5px;
     text-align: left;
 }
 
-.search-button {
+#search-button {
     border-radius: 6px;
-    padding: 1.5vh 50px 1.5vh 5px;
-    background-color: #55E043;
-    color: black;
+    padding: 1em 2em 1em 1em;
+    background-color: #183afa;
+    color: white;
     font-weight: bold;
+    margin-left: 1em;
 }
 
 #header-auth {
@@ -379,4 +388,10 @@ footer {
 
 #attribution {
     display: inline-flexbox;
+}
+
+.error-page {
+    margin-left: 2%;
+    margin-bottom: 5%;
+    line-height: 2;
 }
