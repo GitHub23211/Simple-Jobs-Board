@@ -89,7 +89,7 @@ const View = {
 //Finds the navigation menu link via its innerText then adds the "selected" class to that element's classList
 //It then removes the "selected" class from all the other HTML elements.
 const selectedNav = function(id) {
-    let nav = document.getElementsByClassName('main-menu')
+    let nav = document.getElementsByClassName('main-nav')
     for(let i = 0; i < nav[0].children.length; i++) {
         if(nav[0].children[i].innerText === id) {
             nav[0].children[i].classList.add('selected')

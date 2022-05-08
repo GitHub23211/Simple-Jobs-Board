@@ -102,3 +102,5 @@
 * Backend now fully relies on the Strapi API to sort and filter data rather than using sort() methods or manually finding data by going through an array
 * Made an error-view template that is shown when the user tries to input a hash URL that is not in the routes table.
 * Styled the search bar and modified the layout of the navigation bar
+* changed selectedNav() in view.js to work with the modified layout of the nav bar.
+* Working on bettering the layout of the logo and login area
