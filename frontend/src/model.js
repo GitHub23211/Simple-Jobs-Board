@@ -10,8 +10,6 @@ export {Model}
 
 const Model = {
 
-    jobsResource: `http://localhost:1337/api/jobs?populate=*&sort[0]=publishedAt:desc&pagination[pageSize]=10`,
-
     event: new CustomEvent("modelUpdated"),
 
     firstTenJobs: [],
@@ -24,21 +22,6 @@ const Model = {
     foundData: {},
 
     appliedJobs: {},
-
-    fetchData: function() {
-        fetch(this.jobsResource)
-        .then(
-            (response) => {
-                return response.json()
-            }
-        )
-        .then(
-            (data) => {
-                this.firstTenJobs = data.data
-                window.dispatchEvent(this.event)
-            }
-        )
-    },
 
     //Manually changes the hash URL
     changeHash: function(path, id) {
@@ -77,10 +60,27 @@ const Model = {
         })
     },
 
-    //Fetches a detailed view of a job/company that matches the given id from the Strapi database
-    //data parameter is used to identify whether we are accessing the "jobs" or "companies" collection
-    //event parameter is used to decide what event it will dispatch to the controller
-    fetchIndividual: function(data, id, event) {
+    //Fetches the first 10 jobs from the Strapi database
+    //After sorting by the latest publishedAt date
+    fetchTenJobs: function() {
+        fetch(`http://localhost:1337/api/jobs?populate=*&sort[0]=publishedAt:desc&pagination[pageSize]=10`)
+        .then(
+            (response) => {
+                return response.json()
+            }
+        )
+        .then(
+            (data) => {
+                this.firstTenJobs = data.data
+                window.dispatchEvent(this.event)
+            }
+        )
+    },
+
+    // Fetches a detailed view of a job/company that matches the given id from the Strapi database
+    // Data parameter is used to identify whether we are accessing the "jobs" or "companies" collection
+    // Event parameter is used to decide what event it will dispatch to the controller
+    fetchDetailed: function(data, id, event) {
         fetch(`http://localhost:1337/api/${data}?populate=*&filters[id][$eq]=${id}`)
         .then(
             (response) => {
@@ -95,7 +95,7 @@ const Model = {
         )
     },
 
-    //Fetches all job applications that contain the user's name in the user data field
+    //Fetches all job applications that contain the "user" parameter in the username data field
     fetchAppliedJobs: function(user) {
         fetch(`http://localhost:1337/api/job-applications?populate=*&filters[user][username][$eq]=${user}`)
         .then(

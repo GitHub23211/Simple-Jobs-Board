@@ -10,8 +10,11 @@ export {userAuth}
 const userAuth = {
     userData: null,
     userjwt: null,
-    attemptInvalid: false,
+    loginInvalid: false,
 
+    //POSTs the username and password in the authInfo object parameter to Strapi's authentication API
+    //to verify and log the user in. If Strapi does not return the user data posted, then
+    //dispatch an invalidLogin event. Otherwise, populate the userData and userjwt fields.
     login: function(authInfo) {
         fetch('http://localhost:1337/api/auth/local', {
                 method: 'POST',
@@ -29,21 +32,22 @@ const userAuth = {
         .then(
             (data) => {
                 if(data.error) {
-                    if(!this.attemptInvalid) {
+                    if(!this.loginInvalid) {
                         window.dispatchEvent(new CustomEvent("invalidLogin"))
-                        this.attemptInvalid = true
+                        this.loginInvalid = true
                     }
                 }
                 else {
                     this.userData = data.user
                     this.userjwt = data.jwt
                     window.dispatchEvent(new CustomEvent("modelUpdated"))
-                    this.attemptInvalid = false
+                    this.loginInvalid = false
                 }
             }
         )
     },
 
+    //Returns the user jwt
     getJWT: function() {
         if(this.userjwt) {
             return this.userjwt
@@ -53,6 +57,7 @@ const userAuth = {
         }
     },
 
+    //Checks if the userData field is not null and returns true if it is, false otherwise
     userExists: function() {
         if(this.userData) {
             return true

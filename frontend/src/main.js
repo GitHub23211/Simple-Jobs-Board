@@ -11,7 +11,6 @@ import {Model} from './model.js'
 
 const router = new Router(View.errorView)
 
-//Populates the routes object in route.js
 window.addEventListener("modelUpdated", () => {
     router.get('/', () => {
         View.homeView(Model.firstTenJobs)
@@ -30,11 +29,11 @@ window.addEventListener("modelUpdated", () => {
     })
 
     router.get('/jobs', (pathInfo) => {
-        Model.fetchIndividual('jobs', pathInfo.id, 'jobFetched')
+        Model.fetchDetailed('jobs', pathInfo.id, 'jobFetched')
     })
 
     router.get('/companies', (pathInfo) => {
-        Model.fetchIndividual('companies', pathInfo.id, 'companyFetched')
+        Model.fetchDetailed('companies', pathInfo.id, 'companyFetched')
     })
 
     router.get('/search', (pathInfo) => {
@@ -45,13 +44,15 @@ window.addEventListener("modelUpdated", () => {
         Model.fetchAppliedJobs(userAuth.userData.username)
     })
 
-    //Login form/Logged should be dispalyed constantly so it is not tied to a specific URL
+    //Login form/Logout button should be displayed constantly so it is not tied to a specific hash URL
     View.loginView(userAuth.userData)
 
     router.route()
     allBindings()
 })
 
+//Checks if a search term exists, and decodes its so that special characters such as spaces are rendered properly
+//on the page. Passes the searchTerm to the searchView() function after
 window.addEventListener("searchedJobs", () => {
     let searchTerm = ""
     if(Model.searchResults.searchTerm) {
@@ -60,6 +61,8 @@ window.addEventListener("searchedJobs", () => {
     View.searchView(Model.searchResults.results, searchTerm)
 })
 
+//Calls the jobView() model.
+//If the user is logged in, display the "Apply for this Job" button
 window.addEventListener("jobFetched", () => {
     View.jobView(Model.foundData.data[0], userAuth.userExists())
     if(userAuth.userExists()) {
@@ -67,18 +70,28 @@ window.addEventListener("jobFetched", () => {
     }
 })
 
+//Calls the companyView() function and passes
+//the company data found
 window.addEventListener("companyFetched", () => {
     View.companyView(Model.foundData.data[0])
 })
 
+//Calls  the appliedJobsView() function and passes
+//the object that contains all the jobs
+//the logged in user has applied for
+window.addEventListener("appliedJobsFetched", () => {
+    View.appliedJobsView(Model.appliedJobs)
+})
+
+//Calls the invalidLoginView() if the
+//user fails to log in.
+//Due to the change in view, need to rebind
+//the login and search bindings
 window.addEventListener("invalidLogin", () => {
     View.invalidLoginView()
     allBindings()
 })
 
-window.addEventListener("appliedJobsFetched", () => {
-    View.appliedJobsView(Model.appliedJobs)
-})
 
 
 const allBindings = function() {
@@ -94,7 +107,7 @@ const bindSearch = function() {
 const bindLogin = function() {
     if(!userAuth.userExists()) {
         let loginForm = document.getElementById("login-form")
-        loginForm.onsubmit = auth
+        loginForm.onsubmit = authenticateUser
     }
 
     if(userAuth.userExists()) {
@@ -134,7 +147,7 @@ const searchJobs = function() {
     Model.changeHash("!/search/", this.elements[0].value)
 }
 
-const auth =  function () {
+const authenticateUser =  function () {
     event.preventDefault()
     const authInfo = {
        identifier: this.elements['username'].value,
@@ -148,7 +161,10 @@ const logout = function() {
     window.dispatchEvent(new CustomEvent("modelUpdated"))
 }
 
-
+//Whenever a user visits the website
+//fetch the first 10 jobs from the Strapi database
+//and populate the routes table in router.js
+//and loads the necessary view functions
 window.onload = () => {
-    Model.fetchData()
+    Model.fetchTenJobs()
 }

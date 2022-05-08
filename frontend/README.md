@@ -107,3 +107,5 @@
 * Removed the need for the eachJob Handlebar helper function
     * Used the "pagination" API call to strapi to only return the first 10 entries
 * Fixed the structure of the nav bar so it passes cypress tests.
+* Added comments to most functions.
+    * Will add comments to the others later.
