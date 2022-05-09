@@ -11,8 +11,46 @@ const userAuth = {
     userData: null,
     userjwt: null,
     loginInvalid: false,
+    error: null,
 
-    //POSTs the username and password in the authInfo object parameter to Strapi's authentication API
+    //Sends a POST request containing the username, email and password from the registerForm object 
+    //parameter to Strapi's authentication API to verify and register the user to Strapi's database.
+    register: function(registerForm) {
+        fetch('http://localhost:1337/api/auth/local/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(registerForm)
+        })
+        .then(
+            (response) => {
+                return response.json()
+            }
+        )
+        .then(
+            (data) => {
+                if(data.error) {
+                    if(Object.keys(data.error.details).length > 0) {
+                        this.error = data.error.details.errors
+                    }
+                    else {
+                        this.error = data
+                    }
+                    console.log(data)
+                    window.dispatchEvent(new CustomEvent("modelUpdated"))
+                }
+                else {
+                    this.userData = data.user
+                    this.userjwt = data.jwt
+                    this.loginInvalid = false
+                    window.dispatchEvent(new CustomEvent("registrationSuccess"))
+                }
+            }
+        )
+    },
+
+    //Sends a POST request containing the username and password in the authInfo object parameter to Strapi's authentication API
     //to verify and log the user in. If Strapi does not return the user data posted, then
     //dispatch an invalidLogin event. Otherwise, populate the userData and userjwt fields.
     login: function(authInfo) {
@@ -33,19 +71,20 @@ const userAuth = {
             (data) => {
                 if(data.error) {
                     if(!this.loginInvalid) {
-                        window.dispatchEvent(new CustomEvent("invalidLogin"))
                         this.loginInvalid = true
+                        window.dispatchEvent(new CustomEvent("invalidLogin"))
                     }
                 }
                 else {
                     this.userData = data.user
                     this.userjwt = data.jwt
-                    window.dispatchEvent(new CustomEvent("modelUpdated"))
                     this.loginInvalid = false
+                    window.dispatchEvent(new CustomEvent("modelUpdated"))
                 }
             }
         )
     },
+    
 
     //Returns the user jwt
     getJWT: function() {
@@ -63,5 +102,11 @@ const userAuth = {
             return true
         }
         return false
+    },
+
+    //Sets the error field to null so any error messages on the registration page
+    //do not linger
+    clearError: function() {
+        this.error = null
     }
 }

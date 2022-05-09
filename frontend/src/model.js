@@ -28,7 +28,12 @@ const Model = {
 
     //Manually changes the hash URL
     changeHash: function(path, id) {
-        window.location.hash = path + id
+        if(id) {
+            window.location.hash = path + id
+        }
+        else {
+            window.location.hash = path 
+        }
         window.dispatchEvent(this.event)
     },
 

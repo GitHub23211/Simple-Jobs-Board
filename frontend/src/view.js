@@ -13,22 +13,20 @@ const View = {
         target.innerHTML = template()
     },
     
-    applyTemplate: function(id, string, nav) {
+    applyTemplate: function(id, nav) {
         let target = document.getElementById('main')
         let template = Handlebars.compile(document.getElementById(id).innerText)
-        target.innerHTML = template({text:string})
+        target.innerHTML = template()
         selectedNav(nav)
     },
 
     aboutView: function() {
-        this.applyTemplate("text-template", `Bob's Jobs is a revolution in career planning brought to you by Bob Bobalooba himself!`,
-        "About Us")
+        this.applyTemplate("about-us-template", "About Us")
     },
 
         
     helpView: function() {
-        this.applyTemplate("text-template", `Be sure to he honest in your application!`,
-        "Applicant Help")
+        this.applyTemplate("help-template", "Applicant Help")
     },
 
     homeView: function(data) {
@@ -82,6 +80,12 @@ const View = {
         let jobs = appliedJobs.jobs
         let user = appliedJobs.user
         target.innerHTML = template({job:jobs, user:user})
+    },
+
+    registerUserView: function(errors) {
+        let target = document.getElementById('main')
+        let template = Handlebars.compile(document.getElementById("register-template").innerText)
+        target.innerHTML = template({error:errors})
     }
 }
 

@@ -49,6 +49,12 @@ window.addEventListener("modelUpdated", () => {
         }
     })
 
+    router.get('/register', () => {
+        View.registerUserView(userAuth.error)
+        userAuth.clearError()
+        bindRegister()
+    })
+
     //Login form/Logout button should be displayed constantly so it is not tied to a specific hash URL
     View.loginView(userAuth.userData)
 
@@ -97,6 +103,10 @@ window.addEventListener("invalidLogin", () => {
     allBindings()
 })
 
+window.addEventListener("registrationSuccess", () => {
+    Model.changeHash('home')
+    window.dispatchEvent(new CustomEvent("modelUpdated"))
+})
 
 
 const allBindings = function() {
@@ -107,6 +117,11 @@ const allBindings = function() {
 const bindSearch = function() {
     let searchForm = document.getElementById("search-form")
     searchForm.onsubmit = searchJobs
+}
+
+const bindRegister = function() {
+    let registerForm = document.getElementById("register-form")
+    registerForm.onsubmit = registerUser
 }
 
 const bindLogin = function() {
@@ -150,6 +165,17 @@ const submitApplication = function() {
 const searchJobs = function() {
     event.preventDefault()
     Model.changeHash("!/search/", this.elements[0].value)
+}
+
+const registerUser = function() {
+    event.preventDefault()
+
+    const registerForm = {
+        'username': this.elements['username'].value,
+        'email': this.elements['email'].value,
+        'password': this.elements['password'].value
+    }
+    userAuth.register(registerForm)
 }
 
 const authenticateUser =  function () {

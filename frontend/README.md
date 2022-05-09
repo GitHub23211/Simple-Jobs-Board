@@ -52,8 +52,8 @@
     * "search-template" checks if the array is empty and either displays a view of all relevant jobs or a generic error page that informs the user that their search term did not find any jobs
 
 # Level 4
-* Remove html code in header-auth and created a new "login-template" that shows a login form if a user is logged out, or a message saying "Welcome [user]" if they are logged in.
-    * Login form's onsubmit has been rebounded via the bindings() function in main.js
+* Removed html code in header-auth and created a new "login-template" that shows a login form if a user is logged out, or a message saying "Welcome [user]" if they are logged in.
+    * Login form's onsubmit now rebound via the bindings() function in main.js
         * It now calls a function called auth() in main.js instead that turns the values gotten from the username and password textboxes into a JSON object and passes it to a function in userauth.js called login()
 * userauth.js is an object that stores a user's data and a function called login()
     * login() makes a POST request to Strapi's authentication api and returns a confirmed user's data, prints it to the console and then dispatches a modelUpdated event (for now)
@@ -67,8 +67,7 @@
 * Added a button on a detailed job's page that says Apply for Job. Changed the onclick function of this button to a function called applyJob in main.js.
     * applyJob calls a view function called jobAppView that concatenates the innerHTMl of the page with a template called "jobApp-template" 
         * Essentially, it places a textarea input and a submit button form on top of the job application page
-    * applyJob then dispatches a hashChange event to load the newly concatenated HTML code
-    * The onsubmit function of this submit button has been changed to submitApplication() found in main.ks
+    * The onsubmit function of this submit button has been changed to submitApplication() found in main.js
         * For now, submitApplication() just console logs a message to tell me the button is working.
 * Removed the class structure of model.js and replaced it with a prototype object structure.
 * Added getUser() and getJWT() functions in userAuth.js to be used later for authenticated requests and to show different views when a user is logged in
@@ -86,7 +85,7 @@
 * Improved job fetching mechanism:
     * The function bound to router.routes['/jobs'] is now fetchJobData()
     * fetchJobData() dispatches a new event called "jobFetched" after fetching all its data.
-    * When the jobFectched event is dispatched, a listener function then rns the jobView() functin from view.js to display the job's detailed information.
+    * When the jobFectched event is dispatched, a listener function then calls jobView() from view.js to display the job's detailed information.
 * Borrowed footer html code from assignment 1
 * Styled the job application textarea
 * Added a message that pops up when an invalid username and/or password is used to login
@@ -105,16 +104,26 @@
 * changed selectedNav() in view.js to work with the modified layout of the nav bar.
 * Working on bettering the layout of the logo and login area
 * Removed the need for the eachJob Handlebar helper function
-    * Used the "pagination" API call to strapi to only return the first 10 entries
+    * Used the "pagination" API call to Strapi to only return the first 10 entries
 * Fixed the structure of the nav bar so it passes cypress tests.
 * Added comments to most functions.
     * Will add comments to the others later.
 * Added placeholder text to login form
-* Added a register link and will add a registration apge soon
+* Added a register link and will add a registration page soon
 * Improved the function that is called when the /me hash URL is accessed. Checks if the user is logged in otherwise will show the error page.
-* Changed the appliedJobs variable in model.js into an objet that stores the array of applied jobs and the user's name
+* Changed the appliedJobs variable in model.js into an object that stores the array of applied jobs and the user's name
     * Modified the appliedJobsView() in view.js to use this object
 * Improved layout and css of the:
     * Company page view
     * Logo and login form
     * Job list view
+* Removed generic "text-template" and added specific templates for the about us and help pages
+* Implemented registration page which is described in the other README under the "Extension" heading.
+    * Added a "register-template" to render when the user visits the register hash URL
+    * Added a bindRegister() function which binds the register form's onsubmit to a registerUser() function (both are found in main.js)
+        * registerUser() creates an object that contains the username, email and password fields needed by Strapi to add a new user to the database
+        * Passes this object to a fuction called register() in userAuth.js
+* register() makes a POST request to the account creation API.
+    * If the response is successful, logs the user in and dispatches a registrationSuccess event
+    * If it fails, it shows an error on the registration page
+* After a registrationSuccess event, the user is redirected to the home URL and the page is refreshed.

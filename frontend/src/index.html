@@ -67,8 +67,50 @@
             </div>
         </script>
 
-        <script id="text-template" type="text/x-handlebars-template">
-            <p>{{text}}</p>
+        <script id="about-us-template" type="text/x-handlebars-template">
+            <div id="about-us">
+                <h1>Bob's Jobs is a revolution in career planning brought to you by Bob Bobalooba himself!</h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi condimentum ante eu dolor placerat, sed efficitur 
+                    ante elementum. Nulla facilisi. Aliquam semper ligula mi, quis vulputate turpis rutrum quis. Duis gravida eget lacus 
+                    eget tincidunt. Duis ut erat consectetur, porttitor libero eget, suscipit massa. Donec consequat felis quam, et gravida 
+                    turpis rutrum a. Pellentesque nec mauris sapien. Sed convallis nisi mauris, sit amet placerat nisi viverra volutpat. 
+                    Integer dignissim eget justo at aliquam.
+                </p>
+                <p>
+                    Vestibulum vitae mauris tempus, finibus nulla sed, congue leo. Vestibulum semper elementum elit. Aliquam massa massa, 
+                    hendrerit nec rhoncus suscipit, lobortis nec felis. Quisque cursus ex nec facilisis vehicula. Nullam sed faucibus sapien, 
+                    ut faucibus nunc. Aenean nec vestibulum diam. Nunc justo erat, tincidunt vestibulum tincidunt pretium, consequat nec purus. 
+                    Proin congue mi eu dolor ullamcorper, vitae venenatis nisi porttitor. Nullam consequat, augue id vulputate bibendum, magna eros 
+                    fringilla odio, ornare vehicula massa libero vel nibh. Nulla facilisi. Mauris viverra lectus enim, sit amet eleifend leo gravida in. 
+                    Vivamus aliquam velit et sapien pretium vestibulum.
+                </p>
+            </div>
+        </script>
+
+        <script id="help-template" type="text/x-handlebars-template">
+            <div id="help">
+                <h1>Be sure to he honest in your application!</h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet tincidunt lacus. 
+                    Pellentesque at tincidunt augue, ac sodales magna. Vestibulum odio urna, euismod vel faucibus suscipit, 
+                    lobortis quis risus. Nulla ac magna at metus tempus ultrices vel ac massa. Donec at ante turpis. 
+                    Maecenas posuere mauris et turpis efficitur venenatis et quis tellus. Quisque elementum sem nulla, 
+                    in ullamcorper arcu egestas ut. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. 
+                    Nulla volutpat malesuada nisl, elementum ullamcorper turpis sollicitudin vel. Nam ultrices sit amet metus vitae tincidunt. 
+                    Nunc ultrices elit at erat luctus commodo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. 
+                    Vivamus ac ligula non nisi sollicitudin consequat. Ut feugiat metus sapien, 
+                    eu maximus erat eleifend convallis. Nullam facilisis maximus nisl, blandit feugiat mi rhoncus quis. 
+                    Donec ac nunc consectetur, suscipit ex et, egestas odio.
+                </p>
+                <p>
+                    Phasellus eu ex sed quam mattis aliquet. Integer ac dolor fermentum, consectetur dolor sed, 
+                    facilisis ante. Curabitur tempor et nulla et finibus. Nunc eget tincidunt elit. Aliquam feugiat tellus a facilisis suscipit.
+                    Nulla consequat quis ante vel porta. Nam gravida pretium eros, et convallis nibh molestie sit amet. 
+                    Nulla maximus ante et dui commodo, ut consectetur dolor maximus. Suspendisse ut faucibus felis, egestas auctor dui. 
+                    ulla quam justo, tempor at justo a, aliquam pulvinar sapien. Aliquam sodales tortor quis dui sodales, vehicula vulputate ipsum convallis.
+                </p>
+            </div>
         </script>
 
         <script id="home-template" type="text/x-handlebars-template">
@@ -165,6 +207,30 @@
             {{/if}}
         </script>
 
+        <script id="register-template" type="text/x-handlebars-template">
+            <div id="register-page">
+                <h1>Register an Account </h1>
+                <div class="register">
+                    {{#if error}}
+                        <div class="errors">
+                            {{#each error}}
+                                <div id="message">{{message}}</div>
+                            {{/each}}
+                        </div>
+                    {{/if}}
+                    <form id="register-form">
+                        <label for="username-register" id="username-label"> Username </label>
+                        <input type="text" id="username-register" name="username" Placeholder="Username..." value="">
+                        <label for="password-register" id="password-label"> Password </label>
+                        <input type="password" id="password-register" name="password" placeholder ="Password..." value="">
+                        <label for="email" id="email-label"> Email </label>
+                        <input type="text" id="email" name="email" placeholder ="Email Address..." value="">
+                        <input type="submit" id="register-button" value="Register Account">
+                    </form> 
+                </div>
+            </div>
+        </script>
+
         <script id="jobapp-template" type="text/x-handlebars-template">
             <form id="jobapp-form">
                 <label for="text" id="jobapp-label">Application Details</label>
@@ -182,7 +248,7 @@
 
     <script id="applied-jobs-template" type="text/x-handlebars-template">
         <div id="applied-jobs">
-            <div id="applied-jobs-title">Hello {{user}}, These are the jobs you've applied for:</div> 
+            <div id="applied-jobs-title">Hello {{user}}, these are the jobs you've applied for:</div> 
             <div class='joblist'>
                 {{#each job}}
                     <div class='job'>

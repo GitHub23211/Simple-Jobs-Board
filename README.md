@@ -46,4 +46,8 @@ Details of these levels are now in the [assignment spec](doc/assignment.md).
 
 ## Extension
 
-If you have implemented an extension to the base requirements, describe it here.
+* Implemented a registration form that registers new users to the website
+    * Automatically logs user in and redirects to home page after successful registration
+    * If registration fails, update registration form informing user of what details they are missing/failed to input properly.
+    * However, cannot inform user if password is too short/username is already taken.
+        * Strapi only sends back a generic "An error occurred during account creation" 400 error which makes it impossible to distinguish which error to inform the user of from the API response alone.
