@@ -10,7 +10,6 @@ export {userAuth}
 const userAuth = {
     userData: null,
     userjwt: null,
-    loginInvalid: false,
     error: null,
 
     //Sends a POST request containing the username, email and password from the registerForm object 
@@ -69,15 +68,11 @@ const userAuth = {
         .then(
             (data) => {
                 if(data.error) {
-                    if(!this.loginInvalid) {
-                        this.loginInvalid = true
                         window.dispatchEvent(new CustomEvent("invalidLogin"))
-                    }
                 }
                 else {
                     this.userData = data.user
                     this.userjwt = data.jwt
-                    this.loginInvalid = false
                     window.dispatchEvent(new CustomEvent("modelUpdated"))
                 }
             }

@@ -56,7 +56,7 @@ window.addEventListener("modelUpdated", () => {
     })
 
     //Login form/Logout button should be displayed constantly so it is not tied to a specific hash URL
-    View.loginView(userAuth.userData)
+    View.loginView(userAuth.userData, false)
 
     router.route()
     allBindings()
@@ -99,7 +99,8 @@ window.addEventListener("appliedJobsFetched", () => {
 //Due to the change in view, need to rebind
 //the login and search bindings
 window.addEventListener("invalidLogin", () => {
-    View.invalidLoginView()
+    View.loginView(userAuth.user, true)
+    console.log("invalid login")
     allBindings()
 })
 

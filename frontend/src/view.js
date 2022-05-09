@@ -77,18 +77,10 @@ const View = {
     //If the user is logged in, show a message that contains the user's name
     //and display a logout button next to it.
     //If the user is not logged in, show the login form and a link to register
-    loginView: function(user) {
+    loginView: function(user, failedLogin) {
         let target = document.getElementById('header-auth')
         let template = Handlebars.compile(document.getElementById("login-template").innerText)
-        target.innerHTML = template({user:user})
-    },
-
-    //Small message that pops up that warns the user they entered 
-    //invalid credentials when trying to log in
-    invalidLoginView: function() {
-        let target = document.getElementById('header-auth')
-        let template = Handlebars.compile(document.getElementById("invalid-login-template").innerText)
-        target.innerHTML = template() + target.innerHTML
+        target.innerHTML = template({user:user, failedLogin:failedLogin})
     },
 
     //Responsible for displaying the job application form when the

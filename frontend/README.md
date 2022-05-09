@@ -131,3 +131,6 @@
     * All that's left are the bind functions
 * Created different css styles for the search-header depending on a failed or successful search
 * Styled job application form, and submit, button and input#text elements.
+* Removed invalidLogin boolean from userAuth.js and invalidLoginView from view.js
+    * Added a boolean parameter to loginView() that passes that onto the Handlebars template to decide whether to display the message that informs the user that they failed to login.
+    * Still need to figure out how to remove the message after a certain amount of time or if the user changes page

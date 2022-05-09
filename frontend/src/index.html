@@ -196,6 +196,11 @@
                     <button id="logoutbutton">Logout</button>
                 </div>
             {{else}}
+                {{#if failedLogin}}
+                <div id="invalid-login">
+                    Invalid Username or Password
+                </div>
+                {{/if}}
                 <form id="login-form">
                     <label for="username" id="login-label"> Sign In </label>
                     <input type="text" id="username" name="username" Placeholder="Username..." value="">
@@ -225,7 +230,7 @@
                         <input type="password" id="password-register" name="password" placeholder ="Password..." value="">
                         <label for="email" id="email-label"> Email </label>
                         <input type="text" id="email" name="email" placeholder ="Email Address..." value="">
-                        <input type="submit" id="register-button" value="Register Account">
+                        <input type="submit" id="register-button" value="Register">
                     </form> 
                 </div>
             </div>
@@ -241,9 +246,6 @@
     </body>
 
     <script id="invalid-login-template" type="text/x-handlebars-template">
-        <div id="invalid-login">
-            Invalid Username or Password
-        </div>
     </script>
 
     <script id="applied-jobs-template" type="text/x-handlebars-template">
