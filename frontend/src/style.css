@@ -15,6 +15,22 @@ a:hover {
     text-decoration: underline;
 }
 
+input[type=text]:hover {
+    box-shadow: 0px 0px 0px 1.5px rgba(168, 166, 166, 0.7);
+}
+
+input[type=password]:hover {
+    box-shadow: 0px 0px 0px 1.5px rgba(168, 166, 166, 0.7);
+}
+
+input[type=submit]:hover {
+    box-shadow: 0px 0px 0px 2px rgba(61, 89, 245, 0.871);
+}
+
+button:hover {
+    box-shadow: 0px 0px 0px 2px rgba(61, 89, 245, 0.871);
+}
+
 .logo {
     font-size: 30px;
     position: relative;
@@ -159,6 +175,14 @@ a:hover {
     background-color: #183afabd;
     color: white;
     font-weight: bold;
+}
+
+#logoutbutton {
+    background-color: #183afabd;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 0.3%;
 }
 
 #login-form label {
@@ -341,14 +365,26 @@ a:hover {
     margin-left: 8%;
 }
 
+.job-detailed #apply-button {
+    background-color: #183afa;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 5%;
+    width: 70%;
+}
+
 .job-description {
     grid-column: 2/5;
     grid-row: 2/12;
     height: auto;
 }
+
 #jobapp-form {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    background-color: #fafafab9;
+    border-radius: 5px;
 }
 
 #jobapp-form #jobapp-label {
@@ -356,6 +392,9 @@ a:hover {
     grid-column: 2;
     text-align: center;
     margin-top: 2%;
+    font-size: 150%;
+    font-weight: bold;
+    padding-bottom: 2%;
 }
 
 #jobapp-form #text{
@@ -363,13 +402,23 @@ a:hover {
     grid-column: 2;
     resize: none;
     border-radius: 2%;
+    border: solid 2px;
+}
+
+#jobapp-form #text:hover {
+    box-shadow: 0px 0px 0px 4px rgba(168, 166, 166, 0.7);
 }
 
 #jobapp-form #submitapp-button {
     grid-row: 3;
     grid-column: 2;
+    background-color: #183afa;
+    color: white;
+    border: solid 2px black;
+    font-weight: bold;
     border-radius: 5px;
-    border: solid 1px;
+    padding: 2%;
+    margin-top: 2%;
     margin-bottom: 2%;
 }
 
@@ -437,4 +486,16 @@ footer {
     margin-left: 2%;
     margin-bottom: 5%;
     line-height: 2;
+}
+
+#help {
+    margin-left: 2%;
+    margin-bottom: 2%;
+    line-height: 1.5;
+}
+
+#about-us {
+    margin-left: 2%;
+    margin-bottom: 2%;
+    line-height: 1.5;
 }

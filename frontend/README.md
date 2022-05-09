@@ -130,3 +130,4 @@
 * Added comments to all functions in view.js
     * All that's left are the bind functions
 * Created different css styles for the search-header depending on a failed or successful search
+* Styled job application form, and submit, button and input#text elements.
