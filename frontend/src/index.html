@@ -75,9 +75,10 @@
             <div class='joblist'>
                 {{#each job}}
                     <div class='job'>
-                        <div id='title'><a href='/#!/jobs/{{id}}' class="job-title" data-id="{{id}}"> {{attributes.title}} </a></div>
+                        <div id='title'><a href='/#!/jobs/{{id}}' class="job-title"> {{attributes.title}} </a></div>
                         <div id='location'> Location: {{attributes.location}} </div>
                         <div id='type'> Type: {{attributes.type}} </div>
+                        <div id="view-job"><a href='/#!/jobs/{{id}}'>View Job</a></div>
                     </div>
                 {{/each}}
             </div>
@@ -102,18 +103,19 @@
             <div class='company-description'>
                 <div class='company-name'> {{data.attributes.name}} </div>
                 {{#if data.attributes.logo}}
-                <div class='company-logo'> <img src='{{data.attributes.logo}}' width=100 height=100 alt="{{data.attributes.name}}'s logo"> </div>
+                <div class='company-logo'> <img src='{{data.attributes.logo}}' alt="{{data.attributes.name}}'s logo"> </div>
                 {{/if}}
                 {{#if data.attributes.url}}
-                <div class='company-url'>Website: <a href='{{data.attributes.url}}'> {{data.attributes.url}} </a></div>
+                <div class='company-url'><a href='{{data.attributes.url}}'> {{data.attributes.url}} </a></div>
                 {{/if}}
             </div>
             <div class='joblist'>
                 {{#each job}}
                 <div class='job'>
-                    <div id='title'><a href='/#!/jobs/{{id}}' class="job-title" data-id="{{id}}"> {{attributes.title}} </a></div>
+                    <div id='title'><a href='/#!/jobs/{{id}}' class="job-title"> {{attributes.title}} </a></div>
                     <div id='location'> Location: {{attributes.location}} </div>
                     <div id='type'> Type: {{attributes.type}} </div>
+                    <div id="view-job"><a href='/#!/jobs/{{id}}'>View Job</a></div>
                 </div>
                 {{/each}}
             </div>
@@ -127,9 +129,10 @@
                 <div class='joblist'>
                     {{#each job}}
                         <div class='job'>
-                            <div id='title'><a href='/#!/jobs/{{id}}' class="job-title" data-id="{{id}}"> {{attributes.title}} </a></div>
+                            <div id='title'><a href='/#!/jobs/{{id}}' class="job-title"> {{attributes.title}} </a></div>
                             <div id='location'> Location: {{attributes.location}} </div>
                             <div id='type'> Type: {{attributes.type}} </div>
+                            <div id="view-job"><a href='/#!/jobs/{{id}}'>View Job</a></div>
                         </div>
                     {{/each}}
                 </div>
@@ -153,9 +156,11 @@
             {{else}}
                 <form id="login-form">
                     <label for="username" id="login-label"> Sign In </label>
-                    <input type="text" id="username" name="username" value="">
-                    <input type="password" id="password" name="password" value="">
+                    <input type="text" id="username" name="username" Placeholder="Username..." value="">
+                    <input type="password" id="password" name="password" placeholder ="Password..." value="">
                     <input type="submit" id="loginbutton" value="Login">
+                    or 
+                    <a href="/#!/register">Register</a>
                 </form> 
             {{/if}}
         </script>
@@ -177,13 +182,14 @@
 
     <script id="applied-jobs-template" type="text/x-handlebars-template">
         <div id="applied-jobs">
-            Jobs you've applied for
+            <div id="applied-jobs-title">Hello {{user}}, These are the jobs you've applied for:</div> 
             <div class='joblist'>
                 {{#each job}}
                     <div class='job'>
-                        <div id='title'><a href='/#!/jobs/{{id}}' class="job-title" data-id="{{id}}"> {{attributes.job.data.attributes.title}} </a></div>
+                        <div id='title'><a href='/#!/jobs/{{attributes.job.data.id}}' class="job-title" data-id="{{id}}"> {{attributes.job.data.attributes.title}} </a></div>
                         <div id='location'> Location: {{attributes.job.data.attributes.location}} </div>
                         <div id='type'> Type: {{attributes.job.data.attributes.type}} </div>
+                        <div id="view-job"><a href='/#!/jobs/{{attributes.job.data.id}}'>View Job</a></div>
                     </div>
                 {{/each}}
             </div>

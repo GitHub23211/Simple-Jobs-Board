@@ -41,7 +41,12 @@ window.addEventListener("modelUpdated", () => {
     })
 
     router.get('/me', () => {
-        Model.fetchAppliedJobs(userAuth.userData.username)
+        if(userAuth.userExists()) {
+            Model.fetchAppliedJobs(userAuth.userData.username)
+        }
+        else {
+            View.errorView()
+        }
     })
 
     //Login form/Logout button should be displayed constantly so it is not tied to a specific hash URL

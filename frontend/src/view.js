@@ -79,7 +79,9 @@ const View = {
     appliedJobsView: function(appliedJobs) {
         let target = document.getElementById('main')
         let template = Handlebars.compile(document.getElementById("applied-jobs-template").innerText)
-        target.innerHTML = template({job:appliedJobs})
+        let jobs = appliedJobs.jobs
+        let user = appliedJobs.user
+        target.innerHTML = template({job:jobs, user:user})
     }
 }
 

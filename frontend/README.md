@@ -109,3 +109,12 @@
 * Fixed the structure of the nav bar so it passes cypress tests.
 * Added comments to most functions.
     * Will add comments to the others later.
+* Added placeholder text to login form
+* Added a register link and will add a registration apge soon
+* Improved the function that is called when the /me hash URL is accessed. Checks if the user is logged in otherwise will show the error page.
+* Changed the appliedJobs variable in model.js into an objet that stores the array of applied jobs and the user's name
+    * Modified the appliedJobsView() in view.js to use this object
+* Improved layout and css of the:
+    * Company page view
+    * Logo and login form
+    * Job list view

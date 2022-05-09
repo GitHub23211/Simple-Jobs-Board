@@ -15,13 +15,16 @@ const Model = {
     firstTenJobs: [],
 
     searchResults: {
-        results: [],
-        searchTerm: ""
+        searchTerm: "",
+        results: []
     },
 
     foundData: {},
 
-    appliedJobs: {},
+    appliedJobs: {
+        user: "",
+        jobs: [],
+    },
 
     //Manually changes the hash URL
     changeHash: function(path, id) {
@@ -49,12 +52,12 @@ const Model = {
     },
 
     //Posts the users job application to the Strapi database
-    postApplication: function(appInfo, JWT) {
+    postApplication: function(appInfo, jwt) {
         fetch('http://localhost:1337/api/job-applications', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `bearer ${JWT}`
+                'Authorization': `bearer ${jwt}`
             },
             body: JSON.stringify({data:appInfo})
         })
@@ -105,7 +108,8 @@ const Model = {
         )
         .then(
             (data) => {
-                this.appliedJobs = data.data
+                this.appliedJobs.user = user
+                this.appliedJobs.jobs = data.data
                 window.dispatchEvent(new CustomEvent("appliedJobsFetched"))
             }
         )
