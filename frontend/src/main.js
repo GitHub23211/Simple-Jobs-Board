@@ -103,6 +103,9 @@ window.addEventListener("invalidLogin", () => {
     allBindings()
 })
 
+//If a user's registration is successful
+//redirect the user to the home page and 
+//refresh the page
 window.addEventListener("registrationSuccess", () => {
     Model.changeHash('home')
     window.dispatchEvent(new CustomEvent("modelUpdated"))
@@ -195,7 +198,7 @@ const logout = function() {
 //Whenever a user visits the website
 //fetch the first 10 jobs from the Strapi database
 //and populate the routes table in router.js
-//and loads the necessary view functions
+//and load the necessary view functions
 window.onload = () => {
     Model.fetchTenJobs()
 }

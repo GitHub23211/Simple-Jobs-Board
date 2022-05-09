@@ -127,3 +127,5 @@
     * If the response is successful, logs the user in and dispatches a registrationSuccess event
     * If it fails, it shows an error on the registration page
 * After a registrationSuccess event, the user is redirected to the home URL and the page is refreshed.
+* Added comments to all functions in view.js
+    * All that's left are the bind functions

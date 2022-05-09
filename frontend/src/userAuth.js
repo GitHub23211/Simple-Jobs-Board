@@ -37,7 +37,6 @@ const userAuth = {
                     else {
                         this.error = data
                     }
-                    console.log(data)
                     window.dispatchEvent(new CustomEvent("modelUpdated"))
                 }
                 else {
@@ -104,8 +103,8 @@ const userAuth = {
         return false
     },
 
-    //Sets the error field to null so any error messages on the registration page
-    //do not linger
+    //Sets the error field to null to clear any error messages 
+    //left on the registration page
     clearError: function() {
         this.error = null
     }
