@@ -165,7 +165,7 @@
 
         <script id="search-template" type="text/x-handlebars-template">
             {{#if job}}
-                <div class="search-header">
+                <div class="search-success-header">
                     <h1>"{{searchTerm}}" brought up {{numResults}} results</h1> 
                 </div>
                 <div class='joblist'>
@@ -179,7 +179,7 @@
                     {{/each}}
                 </div>
             {{else}} 
-            <div class="search-header">
+            <div class="search-failed-header">
                 <h1>We couldn't find anything related to "{{searchTerm}}"</h1> 
                 <p>Try:</p>
                 <ul>

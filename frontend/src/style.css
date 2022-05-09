@@ -99,6 +99,16 @@ a:hover {
     padding: 15px 0px 15px;
 }
 
+.search-success-header {
+    text-align: center;
+    line-height: 2;
+}
+
+.search-failed-header {
+    margin-left: 2%;
+    margin-bottom: 2%;
+}
+
 #search-label {
     font-size: 120%;
     font-weight: 500;

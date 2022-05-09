@@ -129,3 +129,4 @@
 * After a registrationSuccess event, the user is redirected to the home URL and the page is refreshed.
 * Added comments to all functions in view.js
     * All that's left are the bind functions
+* Created different css styles for the search-header depending on a failed or successful search
