@@ -7,13 +7,6 @@
 export {View}
 
 const View = {
-    //Error page that is displayed when the user visits a URL not registered on the routes table
-    errorView: function() {
-        let target = document.getElementById('main')
-        let template = Handlebars.compile(document.getElementById("error-page-template").innerText)
-        target.innerHTML = template()
-    },
-    
     //Generic function that simply applies the template and gives the 
     //clicked nav bar link the selected class
     applyTemplate: function(id, nav) {
@@ -21,6 +14,13 @@ const View = {
         let template = Handlebars.compile(document.getElementById(id).innerText)
         target.innerHTML = template()
         selectedNav(nav)
+    },
+
+    //Error page that is displayed when the user visits a URL not registered on the routes table
+    errorView: function() {
+        let target = document.getElementById('main')
+        let template = Handlebars.compile(document.getElementById("error-page-template").innerText)
+        target.innerHTML = template()
     },
 
     //Dispalys the "About Us" page
@@ -47,8 +47,8 @@ const View = {
     //If they are, then show the "Apply for this Job" button
     jobView: function(data, user) {
         let target = document.getElementById('main')
-        let job = data;
         let template = Handlebars.compile(document.getElementById("job-template").innerText)
+        let job = data
         target.innerHTML = template({job: job, user:user})
     },
 
@@ -70,17 +70,6 @@ const View = {
         let target = document.getElementById('main')
         let template = Handlebars.compile(document.getElementById("search-template").innerText)
         target.innerHTML = template({job:data, searchTerm:searchTerm, numResults:data.length})
-    },
-
-    //Simply shows the login form found at the top of the web page.
-    //Takes a user object to check whether the user is logged in or not.
-    //If the user is logged in, show a message that contains the user's name
-    //and display a logout button next to it.
-    //If the user is not logged in, show the login form and a link to register
-    loginView: function(user, failedLogin) {
-        let target = document.getElementById('header-auth')
-        let template = Handlebars.compile(document.getElementById("login-template").innerText)
-        target.innerHTML = template({user:user, failedLogin:failedLogin})
     },
 
     //Responsible for displaying the job application form when the
@@ -110,6 +99,17 @@ const View = {
         let target = document.getElementById('main')
         let template = Handlebars.compile(document.getElementById("register-template").innerText)
         target.innerHTML = template({error:errors})
+    },
+
+    //Simply shows the login form found at the top of the web page.
+    //Takes a user object to check whether the user is logged in or not.
+    //If the user is logged in, show a message that contains the user's name
+    //and display a logout button next to it.
+    //If the user is not logged in, show the login form and a link to register
+    loginView: function(user, failedLogin) {
+        let target = document.getElementById('header-auth')
+        let template = Handlebars.compile(document.getElementById("login-template").innerText)
+        target.innerHTML = template({user:user, failedLogin:failedLogin})
     }
 }
 

@@ -8,6 +8,7 @@ import {Router} from './router.js'
 import {View} from './view.js'
 import {userAuth} from './userAuth.js'
 import {Model} from './model.js'
+import {bindFuncs} from './bindedFunctions.js'
 
 const router = new Router(View.errorView)
 
@@ -59,10 +60,10 @@ window.addEventListener("modelUpdated", () => {
     View.loginView(userAuth.userData, false)
 
     router.route()
-    allBindings()
+    alwaysOnBindings()
 })
 
-//Checks if a search term exists, and decodes its so that special characters such as spaces are rendered properly
+//Checks if a search term exists, and decodes it so that special characters such as spaces are rendered properly
 //on the page. Passes the searchTerm to the searchView() function after
 window.addEventListener("searchedJobs", () => {
     let searchTerm = ""
@@ -101,7 +102,7 @@ window.addEventListener("appliedJobsFetched", () => {
 window.addEventListener("invalidLogin", () => {
     View.loginView(userAuth.user, true)
     console.log("invalid login")
-    allBindings()
+    alwaysOnBindings()
 })
 
 //If a user's registration is successful
@@ -113,88 +114,64 @@ window.addEventListener("registrationSuccess", () => {
 })
 
 
-const allBindings = function() {
+//<-------- Bindings -------->
+
+
+//Functions that must be bound for every page on the site.
+//Specifically, the login, logout and search bar buttons
+const alwaysOnBindings = function() {
     bindSearch()
     bindLogin()
 }
 
+//Binds the search button to the searchJobs() from bindFunctins.js
 const bindSearch = function() {
     let searchForm = document.getElementById("search-form")
-    searchForm.onsubmit = searchJobs
+    searchForm.onsubmit = bindFuncs.searchJobs
 }
 
-const bindRegister = function() {
-    let registerForm = document.getElementById("register-form")
-    registerForm.onsubmit = registerUser
-}
-
+//If the user logs in, find the logout button
+//and bind it to logout() from bindFunctins.js
+//Else, find the login button and bind it
+//to the authenticateUser() from bindFunctins.js
 const bindLogin = function() {
-    if(!userAuth.userExists()) {
-        let loginForm = document.getElementById("login-form")
-        loginForm.onsubmit = authenticateUser
-    }
-
     if(userAuth.userExists()) {
         let logoutButton = document.getElementById("logoutbutton")
-        logoutButton.onclick = logout
+        logoutButton.onclick = bindFuncs.logout
+    }
+    else{
+        let loginForm = document.getElementById("login-form")
+        loginForm.onsubmit = bindFuncs.authenticateUser
     }
 }
 
+//Binds the register account button on the registration page to 
+//registerUser() from bindFunctins.js
+const bindRegister = function() {
+    let registerForm = document.getElementById("register-form")
+    registerForm.onsubmit = bindFuncs.registerUser
+}
+
+//Find the "Apply for this Job" button
+//and bind it to the bindJobAppSubmitButton() function
 const  bindJobAppButton =  function() {
     let applyFormButton = document.getElementById("apply-button")
     if(applyFormButton) {
-        applyFormButton.onclick = applyJob
+        applyFormButton.onclick = bindJobAppSubmitButton
     }
 }
 
-const applyJob = function() {
+//Displays the job application form
+//then finds the form's submit button and binds it to
+//submitApplication() from bindFunctins.js
+const bindJobAppSubmitButton = function() {
     View.jobAppView()
     let jobAppSubmit = document.getElementById("jobapp-form")
     if(jobAppSubmit) {
-        jobAppSubmit.onsubmit = submitApplication
+        jobAppSubmit.onsubmit = bindFuncs.submitApplication
     }
 }
 
-const submitApplication = function() {
-    event.preventDefault()
-    const jobAppData = {
-        'text': this.elements['text'].value,
-        'job': Model.foundData.data[0],
-        'user': userAuth.userData
-    }
-    Model.postApplication(jobAppData, userAuth.getJWT())
-    Model.changeHash("!/me", "")
-}
-
-const searchJobs = function() {
-    event.preventDefault()
-    Model.changeHash("!/search/", this.elements[0].value)
-}
-
-const registerUser = function() {
-    event.preventDefault()
-
-    const registerForm = {
-        'username': this.elements['username'].value,
-        'email': this.elements['email'].value,
-        'password': this.elements['password'].value
-    }
-    userAuth.register(registerForm)
-}
-
-const authenticateUser =  function () {
-    event.preventDefault()
-    const authInfo = {
-       identifier: this.elements['username'].value,
-       password: this.elements['password'].value 
-    }
-    userAuth.login(authInfo)
-}
-
-const logout = function() {
-    userAuth.userData = null
-    window.dispatchEvent(new CustomEvent("modelUpdated"))
-}
 
 //Whenever a user visits the website
 //fetch the first 10 jobs from the Strapi database

@@ -283,7 +283,7 @@ button:hover {
 }
 
 .job {
-    background-color: #fafafab9;
+    background-color: #fafafaec;
     border: 2px groove black;
     width: 40%;
     margin: auto;
@@ -292,7 +292,7 @@ button:hover {
 }
 
 .job:hover {
-    box-shadow: 0px 0px 0px 4px rgba(168, 166, 166, 0.7);
+    box-shadow: 0px 0px 0px 4px rgba(168, 166, 166, 1);
 }
 
 .job #title {

@@ -60,10 +60,24 @@
                 <h1>Page not Found</h1>
                 Sorry, we couldn't find the page you were looking for. This is because:
                 <ul>
-                    <li>There is an error in your URL. Please double check the URL and try again</li>
-                    <li>The page has been moved or deleted</li>
+                    <li>There is an error in your URL. Please double check the URL and try again.</li>
+                    <li>The page has been moved or deleted.</li>
+                    <li>You do not have the authority to access this page.</li>
                 </ul>
                 <b>Try returning to the home page, or search for other content using the search bar.</b>
+            </div>
+        </script>
+
+        <script id="home-template" type="text/x-handlebars-template">
+            <div class='joblist'>
+                {{#each job}}
+                    <div class='job'>
+                        <div id='title'><a href='/#!/jobs/{{id}}' class="job-title"> {{attributes.title}} </a></div>
+                        <div id='location'> Location: {{attributes.location}} </div>
+                        <div id='type'> Type: {{attributes.type}} </div>
+                        <div id="view-job"><a href='/#!/jobs/{{id}}'>View Job</a></div>
+                    </div>
+                {{/each}}
             </div>
         </script>
 
@@ -113,56 +127,6 @@
             </div>
         </script>
 
-        <script id="home-template" type="text/x-handlebars-template">
-            <div class='joblist'>
-                {{#each job}}
-                    <div class='job'>
-                        <div id='title'><a href='/#!/jobs/{{id}}' class="job-title"> {{attributes.title}} </a></div>
-                        <div id='location'> Location: {{attributes.location}} </div>
-                        <div id='type'> Type: {{attributes.type}} </div>
-                        <div id="view-job"><a href='/#!/jobs/{{id}}'>View Job</a></div>
-                    </div>
-                {{/each}}
-            </div>
-        </script>
-
-        <script id="job-template" type="text/x-handlebars-template">
-            <div class='job-detailed'>
-                <div id='jobtitle'> {{job.attributes.title}} </div>
-                <div id='location'> Location: {{job.attributes.location}} </div>
-                <div id='type'> Type: {{job.attributes.type}} </div>
-                <div id='company'>Company: <a href='/#!/companies/{{job.attributes.company.data.id}}'>{{job.attributes.company.data.attributes.name}} </a></div>
-                {{#if user}}
-                    <div id="apply-job">
-                        <button id="apply-button">Apply for this Job</button>
-                    </div>
-                {{/if}}
-                <div class='job-description'>{{{job.attributes.description}}}</div> 
-            </div>
-        </script>
-
-        <script id="company-template" type="text/x-handlebars-template">
-            <div class='company-description'>
-                <div class='company-name'> {{data.attributes.name}} </div>
-                {{#if data.attributes.logo}}
-                <div class='company-logo'> <img src='{{data.attributes.logo}}' alt="{{data.attributes.name}}'s logo"> </div>
-                {{/if}}
-                {{#if data.attributes.url}}
-                <div class='company-url'><a href='{{data.attributes.url}}'> {{data.attributes.url}} </a></div>
-                {{/if}}
-            </div>
-            <div class='joblist'>
-                {{#each job}}
-                <div class='job'>
-                    <div id='title'><a href='/#!/jobs/{{id}}' class="job-title"> {{attributes.title}} </a></div>
-                    <div id='location'> Location: {{attributes.location}} </div>
-                    <div id='type'> Type: {{attributes.type}} </div>
-                    <div id="view-job"><a href='/#!/jobs/{{id}}'>View Job</a></div>
-                </div>
-                {{/each}}
-            </div>
-        </script>
-
         <script id="search-template" type="text/x-handlebars-template">
             {{#if job}}
                 <div class="search-success-header">
@@ -189,27 +153,49 @@
             {{/if}}
         </script>
 
-        <script id="login-template" type="text/x-handlebars-template">
-            {{#if user}}
-                <div id="logged-in">
-                    Logged in as {{user.username}}
-                    <button id="logoutbutton">Logout</button>
-                </div>
-            {{else}}
-                {{#if failedLogin}}
-                <div id="invalid-login">
-                    Invalid Username or Password
-                </div>
+        <script id="job-template" type="text/x-handlebars-template">
+            <div class='job-detailed'>
+                <div id='jobtitle'> {{job.attributes.title}} </div>
+                <div id='location'> Location: {{job.attributes.location}} </div>
+                <div id='type'> Type: {{job.attributes.type}} </div>
+                <div id='company'>Company: <a href='/#!/companies/{{job.attributes.company.data.id}}'>{{job.attributes.company.data.attributes.name}} </a></div>
+                {{#if user}}
+                    <div id="apply-job">
+                        <button id="apply-button">Apply for this Job</button>
+                    </div>
                 {{/if}}
-                <form id="login-form">
-                    <label for="username" id="login-label"> Sign In </label>
-                    <input type="text" id="username" name="username" Placeholder="Username..." value="">
-                    <input type="password" id="password" name="password" placeholder ="Password..." value="">
-                    <input type="submit" id="loginbutton" value="Login">
-                    or 
-                    <a href="/#!/register">Register</a>
-                </form> 
-            {{/if}}
+                <div class='job-description'>{{{job.attributes.description}}}</div> 
+            </div>
+        </script>
+
+        <script id="jobapp-template" type="text/x-handlebars-template">
+            <form id="jobapp-form">
+                <label for="text" id="jobapp-label">Application Details</label>
+                <textarea id="text" name="text" required cols="100" placeholder="Write down why you want this job..." rows="20" value=""></textarea>
+                <input type="submit" id="submitapp-button" value="Submit Application">
+            </form> 
+        </script>
+
+        <script id="company-template" type="text/x-handlebars-template">
+            <div class='company-description'>
+                <div class='company-name'> {{data.attributes.name}} </div>
+                {{#if data.attributes.logo}}
+                <div class='company-logo'> <img src='{{data.attributes.logo}}' alt="{{data.attributes.name}}'s logo"> </div>
+                {{/if}}
+                {{#if data.attributes.url}}
+                <div class='company-url'><a href='{{data.attributes.url}}'> {{data.attributes.url}} </a></div>
+                {{/if}}
+            </div>
+            <div class='joblist'>
+                {{#each job}}
+                <div class='job'>
+                    <div id='title'><a href='/#!/jobs/{{id}}' class="job-title"> {{attributes.title}} </a></div>
+                    <div id='location'> Location: {{attributes.location}} </div>
+                    <div id='type'> Type: {{attributes.type}} </div>
+                    <div id="view-job"><a href='/#!/jobs/{{id}}'>View Job</a></div>
+                </div>
+                {{/each}}
+            </div>
         </script>
 
         <script id="register-template" type="text/x-handlebars-template">
@@ -236,31 +222,48 @@
             </div>
         </script>
 
-        <script id="jobapp-template" type="text/x-handlebars-template">
-            <form id="jobapp-form">
-                <label for="text" id="jobapp-label">Application Details</label>
-                <textarea id="text" name="text" required cols="100" placeholder="Write down why you want this job..." rows="20" value=""></textarea>
-                <input type="submit" id="submitapp-button" value="Submit Application">
-            </form> 
+        <script id="login-template" type="text/x-handlebars-template">
+            {{#if user}}
+                <div id="logged-in">
+                    Logged in as {{user.username}}
+                    <button id="logoutbutton">Logout</button>
+                </div>
+            {{else}}
+                {{#if failedLogin}}
+                <div id="invalid-login">
+                    Invalid Username or Password
+                </div>
+                {{/if}}
+                <form id="login-form">
+                    <label for="username" id="login-label"> Sign In </label>
+                    <input type="text" id="username" name="username" Placeholder="Username..." value="">
+                    <input type="password" id="password" name="password" placeholder ="Password..." value="">
+                    <input type="submit" id="loginbutton" value="Login">
+                    or 
+                    <a href="/#!/register">Register</a>
+                </form> 
+            {{/if}}
         </script>
+
+        <script id="invalid-login-template" type="text/x-handlebars-template">
+        </script>
+
+        <script id="applied-jobs-template" type="text/x-handlebars-template">
+            <div id="applied-jobs">
+                <div id="applied-jobs-title">Hello {{user}}, these are the jobs you've applied for:</div> 
+                <div class='joblist'>
+                    {{#each job}}
+                        <div class='job'>
+                            <div id='title'><a href='/#!/jobs/{{attributes.job.data.id}}' class="job-title" data-id="{{id}}"> {{attributes.job.data.attributes.title}} </a></div>
+                            <div id='location'> Location: {{attributes.job.data.attributes.location}} </div>
+                            <div id='type'> Type: {{attributes.job.data.attributes.type}} </div>
+                            <div id="view-job"><a href='/#!/jobs/{{attributes.job.data.id}}'>View Job</a></div>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+        </script>
+        
     </body>
 
-    <script id="invalid-login-template" type="text/x-handlebars-template">
-    </script>
-
-    <script id="applied-jobs-template" type="text/x-handlebars-template">
-        <div id="applied-jobs">
-            <div id="applied-jobs-title">Hello {{user}}, these are the jobs you've applied for:</div> 
-            <div class='joblist'>
-                {{#each job}}
-                    <div class='job'>
-                        <div id='title'><a href='/#!/jobs/{{attributes.job.data.id}}' class="job-title" data-id="{{id}}"> {{attributes.job.data.attributes.title}} </a></div>
-                        <div id='location'> Location: {{attributes.job.data.attributes.location}} </div>
-                        <div id='type'> Type: {{attributes.job.data.attributes.type}} </div>
-                        <div id="view-job"><a href='/#!/jobs/{{attributes.job.data.id}}'>View Job</a></div>
-                    </div>
-                {{/each}}
-            </div>
-        </div>
-    </script>
 </html>

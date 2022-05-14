@@ -41,7 +41,6 @@ const userAuth = {
                 else {
                     this.userData = data.user
                     this.userjwt = data.jwt
-                    this.loginInvalid = false
                     window.dispatchEvent(new CustomEvent("registrationSuccess"))
                 }
             }

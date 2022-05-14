@@ -134,3 +134,6 @@
 * Removed invalidLogin boolean from userAuth.js and invalidLoginView from view.js
     * Added a boolean parameter to loginView() that passes that onto the Handlebars template to decide whether to display the message that informs the user that they failed to login.
     * Still need to figure out how to remove the message after a certain amount of time or if the user changes page
+* Created a new object called bindedFunctions.js that stores all the functions that are bound to various buttons by the binding functions in main.js
+* Added comments to these functions and the binding functions as well.
+* Rearranged the order of the Handlebars templates in index.html and the functions in view.js
