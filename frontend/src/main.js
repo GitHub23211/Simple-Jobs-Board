@@ -114,28 +114,6 @@ window.addEventListener("registrationSuccess", () => {
     window.dispatchEvent(new CustomEvent("modelUpdated"))
 })
 
-//If a user tries to click the "Apply for this Job" button
-//while they already have an application for that job,
-//Show a warning to the user
-window.addEventListener("alreadyApplied", () => {
-    View.jobView(Model.foundData.data[0], userAuth.userExists(), true)
-    alwaysOnBindings()
-})
-
-//If a user cliks on the "Apply for this Job" button
-//and they haven't applied for the job yet,
-//show the job application form 
-//and bind the submit action to submitApplication()
-//in bindedFunctions.js
-window.addEventListener("sendApplication", () => {
-    View.jobAppView()
-    let jobAppSubmit = document.getElementById("jobapp-form")
-    if(jobAppSubmit) {
-        jobAppSubmit.onsubmit = bindFuncs.submitApplication
-    }
-})
-
-
 //<-------- Bindings -------->
 
 
@@ -187,7 +165,11 @@ const  bindJobAppButton =  function() {
 //then finds the form's submit button and bind it to
 //submitApplication() from bindFunctins.js
 const bindJobAppSubmitButton = function() {
-    Model.checkIfApplied(userAuth.userData, Model.foundData.data[0].id)
+    View.jobAppView()
+    let jobAppSubmit = document.getElementById("jobapp-form")
+    if(jobAppSubmit) {
+        jobAppSubmit.onsubmit = bindFuncs.submitApplication
+    }
 }
 
 

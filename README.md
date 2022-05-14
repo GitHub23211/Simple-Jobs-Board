@@ -51,5 +51,4 @@ Details of these levels are now in the [assignment spec](doc/assignment.md).
     * If registration fails, update registration form informing user of what details they are missing/failed to input properly.
     * However, cannot inform user if password is too short/username is already taken.
         * Strapi only sends back a generic "An error occurred during account creation" 400 error which makes it impossible to distinguish which error to inform the user of from the API response alone.
-* User can now not apply for the same job multiple times
 * Added a "My Applications" link to the nav bar so the user can directly view for the jobs they've applied for

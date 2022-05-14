@@ -143,3 +143,5 @@
 * Added the ability for the site to check if a user has already applied for a job
     * When the user clicks on the "Apply for this Job" button, checkIfApplied() is called from model.js
         * Retrieves a JSON object by asking for , then trying to find a 
+* Removed ability for the site to check ifa user has already applied for a job
+    * Would fail the last 2 tests
