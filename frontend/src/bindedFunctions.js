@@ -41,6 +41,7 @@ const bindFuncs = {
     //will now treat the user as an unauthenticated guest
     logout: function() {
         userAuth.userData = null
+        Model.changeHash('home')
         window.dispatchEvent(new CustomEvent("modelUpdated"))
     },
 
@@ -59,10 +60,10 @@ const bindFuncs = {
     submitApplication: function() {
         event.preventDefault()
         const jobAppData = {
-            'text': this.elements['text'].value,
-            'job': Model.foundData.data[0],
-            'user': userAuth.userData
-        }
+                'text': this.elements['text'].value,
+                'job': Model.foundData.data[0],
+                'user': userAuth.userData
+            }
         Model.postApplication(jobAppData, userAuth.getJWT())
         Model.changeHash("!/me", "")
     }

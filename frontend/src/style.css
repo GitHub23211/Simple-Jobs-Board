@@ -35,7 +35,7 @@ button:hover {
     font-size: 30px;
     position: relative;
     top: 1.5vh;
-    left: 7%;
+    margin-left: 7%;
 }
 
 .page-header {
@@ -53,7 +53,6 @@ button:hover {
 
 .page-header-main {
     border-radius: 10px;
-    background-color: #042769;
     color: #EEEEFF;
     display: grid;
     grid-template-areas: 
@@ -64,10 +63,12 @@ button:hover {
 
 .main-nav {
     grid-area: menu;
+    background-color: #042769;
 }
 
 .main-menu {
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
     text-align: center;
 }
 
@@ -79,6 +80,7 @@ button:hover {
 
 .main-menu #home-link {
     grid-column: 1;
+    flex: 5vw;
 }
 
 .main-menu #home-link a{
@@ -88,6 +90,7 @@ button:hover {
 
 .main-menu #help-link {
     grid-column: 2;
+    flex: 5vw;
 }
 
 .main-menu #help-link a {
@@ -95,8 +98,19 @@ button:hover {
     padding: 1em;
 }
 
-.main-menu #about-link {
+.main-menu #app-link {
     grid-column: 3;
+    flex: 5vw;
+}
+
+.main-menu #app-link a{
+    width: 100%;
+    padding: 1em;
+}
+
+.main-menu #about-link {
+    grid-column: 4;
+    flex: 5vw;
 }
 
 .main-menu #about-link a{
@@ -164,6 +178,7 @@ button:hover {
     grid-column: 3;
     grid-row: 2;
     padding-right: 10vw;
+    margin-top: 2vh;
 }
 
 #login-form input {
@@ -191,6 +206,7 @@ button:hover {
 
 #logged-in {
     padding-right: 10vw;
+    margin-top: 2vh;
 }
 
 #register-page {
@@ -200,9 +216,9 @@ button:hover {
 }
 
 .register {
-    background-color: #fafafab9;
+    background-color: #fafafaec;
     border: 2px groove black;
-    width: 35%;
+    width: 30vw;
     margin: auto;
     padding-bottom: 5%;
     border-radius: 5px;
@@ -285,7 +301,7 @@ button:hover {
 .job {
     background-color: #fafafaec;
     border: 2px groove black;
-    width: 40%;
+    width: 30vw;
     margin: auto;
     border-radius: 5px;
     margin-bottom: 1em;
@@ -325,6 +341,7 @@ button:hover {
 
 .job-detailed {
     display: grid;
+    flex-wrap: wrap;
     grid-template-columns: repeat(5, 1fr);
     background-color: #fafafa81;
 }
@@ -343,6 +360,7 @@ button:hover {
     margin-top: 8%;
     margin-left: 8%;
     font-weight: bold;
+    padding-right: 10vw;
 }
 
 .job-detailed #location {
@@ -350,6 +368,7 @@ button:hover {
     margin-top: 8%;
     margin-left: 8%;
     font-weight: bold;
+    padding-right: 10vw;
 }
 
 .job-detailed #type {
@@ -357,12 +376,14 @@ button:hover {
     margin-top: 8%;
     margin-left: 8%;
     font-weight: bold;
+    padding-right: 10vw;
 }
 
 .job-detailed #apply-job {
     grid-column: 1;
     margin-top: 8%;
     margin-left: 8%;
+    padding-right: 10vw;
 }
 
 .job-detailed #apply-button {
@@ -370,8 +391,15 @@ button:hover {
     color: white;
     font-weight: bold;
     border-radius: 5px;
-    padding: 5%;
-    width: 70%;
+    padding: 12%;
+    width: 100%;
+}
+
+.job-detailed #app-warning {
+    grid-column: 1;
+    margin-top: 2%;
+    margin-left: 9%;
+    color: red;
 }
 
 .job-description {

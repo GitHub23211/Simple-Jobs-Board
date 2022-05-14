@@ -23,6 +23,12 @@ const View = {
         target.innerHTML = template()
     },
 
+    navBarView: function(user) {
+        let target = document.getElementsByClassName('main-menu')
+        let template = Handlebars.compile(document.getElementById("nav-bar-template").innerText)
+        target[0].innerHTML = template({user:user})
+    },
+
     //Dispalys the "About Us" page
     aboutView: function() {
         this.applyTemplate("about-us-template", "About Us")
@@ -45,11 +51,11 @@ const View = {
     //and dispalys a detailed view of that job such as its full description.
     //A user field is taken to check whether the user is logged in
     //If they are, then show the "Apply for this Job" button
-    jobView: function(data, user) {
+    jobView: function(data, user, applied) {
         let target = document.getElementById('main')
         let template = Handlebars.compile(document.getElementById("job-template").innerText)
         let job = data
-        target.innerHTML = template({job: job, user:user})
+        target.innerHTML = template({job: job, user:user, applied:applied})
     },
 
     //Takes an object that contains all the information about a specific company

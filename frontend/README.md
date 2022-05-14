@@ -137,3 +137,9 @@
 * Created a new object called bindedFunctions.js that stores all the functions that are bound to various buttons by the binding functions in main.js
 * Added comments to these functions and the binding functions as well.
 * Rearranged the order of the Handlebars templates in index.html and the functions in view.js
+* Turned the nav-bar html code into a Handlebars template so that it's able to decide for itself whether to show the "My Applications" link depending on if the user is logged in or not.
+    * Added a navBarView() function in view.js to display the nav nar
+* Changed the display mode of the navigation bar to flex from grid.
+* Added the ability for the site to check if a user has already applied for a job
+    * When the user clicks on the "Apply for this Job" button, checkIfApplied() is called from model.js
+        * Retrieves a JSON object by asking for , then trying to find a 

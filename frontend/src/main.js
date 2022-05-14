@@ -56,8 +56,10 @@ window.addEventListener("modelUpdated", () => {
         bindRegister()
     })
 
-    //Login form/Logout button should be displayed constantly so it is not tied to a specific hash URL
+    //Login form/Logout button and navigation bar should be displayed constantly 
+    //so it is not tied to a specific hash URL
     View.loginView(userAuth.userData, false)
+    View.navBarView(userAuth.userExists())
 
     router.route()
     alwaysOnBindings()
@@ -73,31 +75,30 @@ window.addEventListener("searchedJobs", () => {
     View.searchView(Model.searchResults.results, searchTerm)
 })
 
-//Calls the jobView() model.
+//Calls jobView() from view.js
 //If the user is logged in, display the "Apply for this Job" button
 window.addEventListener("jobFetched", () => {
-    View.jobView(Model.foundData.data[0], userAuth.userExists())
+    View.jobView(Model.foundData.data[0], userAuth.userExists(), false)
     if(userAuth.userExists()) {
         bindJobAppButton()
     }
 })
 
-//Calls the companyView() function and passes
+//Calls companyView() from view.js and passes
 //the company data found
 window.addEventListener("companyFetched", () => {
     View.companyView(Model.foundData.data[0])
 })
 
-//Calls  the appliedJobsView() function and passes
+//Calls appliedJobsView() from view.js and passes
 //the object that contains all the jobs
 //the logged in user has applied for
 window.addEventListener("appliedJobsFetched", () => {
     View.appliedJobsView(Model.appliedJobs)
 })
 
-//Calls the invalidLoginView() if the
-//user fails to log in.
-//Due to the change in view, need to rebind
+//Calls invalidLoginView() from view.js if the
+//user fails to log in. Due to the change in view, need to rebind
 //the login and search bindings
 window.addEventListener("invalidLogin", () => {
     View.loginView(userAuth.user, true)
@@ -113,18 +114,39 @@ window.addEventListener("registrationSuccess", () => {
     window.dispatchEvent(new CustomEvent("modelUpdated"))
 })
 
+//If a user tries to click the "Apply for this Job" button
+//while they already have an application for that job,
+//Show a warning to the user
+window.addEventListener("alreadyApplied", () => {
+    View.jobView(Model.foundData.data[0], userAuth.userExists(), true)
+    alwaysOnBindings()
+})
+
+//If a user cliks on the "Apply for this Job" button
+//and they haven't applied for the job yet,
+//show the job application form 
+//and bind the submit action to submitApplication()
+//in bindedFunctions.js
+window.addEventListener("sendApplication", () => {
+    View.jobAppView()
+    let jobAppSubmit = document.getElementById("jobapp-form")
+    if(jobAppSubmit) {
+        jobAppSubmit.onsubmit = bindFuncs.submitApplication
+    }
+})
+
 
 //<-------- Bindings -------->
 
 
-//Functions that must be bound for every page on the site.
+//Functions that bind functions to buttons must be bound for every page on the site.
 //Specifically, the login, logout and search bar buttons
 const alwaysOnBindings = function() {
     bindSearch()
     bindLogin()
 }
 
-//Binds the search button to the searchJobs() from bindFunctins.js
+//Binds the search button to searchJobs() from bindFunctions.js
 const bindSearch = function() {
     let searchForm = document.getElementById("search-form")
     searchForm.onsubmit = bindFuncs.searchJobs
@@ -162,14 +184,10 @@ const  bindJobAppButton =  function() {
 }
 
 //Displays the job application form
-//then finds the form's submit button and binds it to
+//then finds the form's submit button and bind it to
 //submitApplication() from bindFunctins.js
 const bindJobAppSubmitButton = function() {
-    View.jobAppView()
-    let jobAppSubmit = document.getElementById("jobapp-form")
-    if(jobAppSubmit) {
-        jobAppSubmit.onsubmit = bindFuncs.submitApplication
-    }
+    Model.checkIfApplied(userAuth.userData, Model.foundData.data[0].id)
 }
 
 

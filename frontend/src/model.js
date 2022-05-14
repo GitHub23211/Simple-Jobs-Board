@@ -118,5 +118,30 @@ const Model = {
                 window.dispatchEvent(new CustomEvent("appliedJobsFetched"))
             }
         )
+    },
+
+    //Checks if a user already has a job application tied to them in the Strapi database.
+    //Tries to retrieve a JSON object of this application.
+    //If the data array found in this object has a length of 0 i.e. is empty,
+    //Then the user has not applied for this job yet. Else, they have.
+    //Dispatches the respective events based on this condition
+    checkIfApplied: function(user, id) {
+        const username = user.username
+        fetch(`http://localhost:1337/api/job-applications?populate=*&filters[user][username][$eq]=${username}&filters[job][id][$eq]=${id}`)
+        .then(
+            (response) => {
+                return response.json()
+            }
+        )
+        .then(
+            (data) => {
+                if(data.data.length != 0) {
+                    window.dispatchEvent(new CustomEvent("alreadyApplied"))
+                }
+                else {
+                    window.dispatchEvent(new CustomEvent("sendApplication"))
+                }
+            }
+        )
     }
 }
