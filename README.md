@@ -51,4 +51,8 @@ Details of these levels are now in the [assignment spec](doc/assignment.md).
     * If registration fails, update registration form informing user of what details they are missing/failed to input properly.
     * However, cannot inform user if password is too short/username is already taken.
         * Strapi only sends back a generic "An error occurred during account creation" 400 error which makes it impossible to distinguish which error to inform the user of from the API response alone.
-* Added a "My Applications" link to the nav bar so the user can directly view the jobs they've applied for
+* Added a "My Applications" link to the nav bar so the user can directly view the jobs they've applied for.
+    * Only appears if they have logged in.
+* Search terms that return 0 results show a "no results found page" that suggests different actions the user can take to make a better search.
+* Accessing the '/me' hash url without being logged in now shows the error page.
+* Logging out now returns you to the home page.
