@@ -50,8 +50,10 @@ window.addEventListener("modelUpdated", () => {
         }
     })
 
+    //Passes the current value of registrationError from userAuth.js
+    //then reset this value and rebind the register account button
     router.get('/register', () => {
-        View.registerUserView(userAuth.error)
+        View.registerUserView(userAuth.registrationError)
         userAuth.clearError()
         bindRegister()
     })
@@ -77,6 +79,7 @@ window.addEventListener("searchedJobs", () => {
 
 //Calls jobView() from view.js
 //If the user is logged in, display the "Apply for this Job" button
+//and rebind its onsubmit call
 window.addEventListener("jobFetched", () => {
     View.jobView(Model.foundData.data[0], userAuth.userExists(), false)
     if(userAuth.userExists()) {
@@ -102,7 +105,6 @@ window.addEventListener("appliedJobsFetched", () => {
 //the login and search bindings
 window.addEventListener("invalidLogin", () => {
     View.loginView(userAuth.user, true)
-    console.log("invalid login")
     alwaysOnBindings()
 })
 
@@ -113,6 +115,7 @@ window.addEventListener("registrationSuccess", () => {
     Model.changeHash('home')
     window.dispatchEvent(new CustomEvent("modelUpdated"))
 })
+
 
 //<-------- Bindings -------->
 
@@ -162,7 +165,7 @@ const  bindJobAppButton =  function() {
 }
 
 //Displays the job application form
-//then finds the form's submit button and bind it to
+//then finds the form's submit button and binds it to
 //submitApplication() from bindFunctins.js
 const bindJobAppSubmitButton = function() {
     View.jobAppView()

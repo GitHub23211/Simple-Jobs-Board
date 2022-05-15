@@ -10,10 +10,12 @@ export {userAuth}
 const userAuth = {
     userData: null,
     userjwt: null,
-    error: null,
+    registrationError: null,
 
     //Sends a POST request containing the username, email and password from the registerForm object 
     //parameter to Strapi's authentication API to verify and register the user to Strapi's database.
+    //Also stores any errors encountered during user registration that will then be accessed by
+    //a view function to display them to the user
     register: function(registerForm) {
         fetch('http://localhost:1337/api/auth/local/register', {
             method: 'POST',
@@ -100,6 +102,6 @@ const userAuth = {
     //Sets the error field to null to clear any error messages 
     //left on the registration page
     clearError: function() {
-        this.error = null
+        this.registrationError = null
     }
 }
